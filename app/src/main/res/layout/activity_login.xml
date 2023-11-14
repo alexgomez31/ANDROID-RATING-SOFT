@@ -51,7 +51,7 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="-20dp"
                     android:fontFamily="@font/hurme_light"
-                    android:text="Bienvenid@ !!"
+                    android:text="RATINGSOFT"
                     android:textSize="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
