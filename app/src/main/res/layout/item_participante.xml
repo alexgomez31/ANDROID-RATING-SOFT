@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ProgressBar
+        android:id="@+id/progresBarParticipante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="11dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/framelayoutParticipantes"
+        app:layout_constraintStart_toStartOf="@+id/framelayoutParticipantes"
+        app:layout_constraintTop_toTopOf="@+id/framelayoutParticipantes" />
+
+    <FrameLayout
+        android:id="@+id/framelayoutParticipantes"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/cardViewParticipante"
+        app:layout_constraintEnd_toStartOf="@id/cardViewParticipante"
+        app:layout_constraintTop_toTopOf="@id/cardViewParticipante">
+
+        <!-- ShapeableImageView para el borde -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_blue_border"
+            app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+        <!-- ShapeableImageView para la imagen -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageViewProfileParticipante"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile"
+            app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+    </FrameLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewParticipante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:layout_marginStart="-30dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toEndOf="@id/framelayoutParticipantes"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <TextView
+                android:id="@+id/tvAliasParticipante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="start"
+                android:paddingTop="7dp"
+                android:paddingStart="7dp"
+                android:paddingBottom="2dp"
+                style="@style/textoStyleBoldGreen"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvNombreCompleto"
+                tools:text="Gabri" />
+
+            <TextView
+                android:id="@+id/tvNombreCompleto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="7dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="5dp"
+                style="@style/textoStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvAliasParticipante"
+                app:layout_constraintTop_toBottomOf="@id/tvAliasParticipante"
+                tools:text="Nombre completo" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

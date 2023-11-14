@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC0</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="negro">#000000</color>
+    <color name="DarkPrimary">#151E21</color>
+    <color name="DarkSecondari">#434343</color>
+    <color name="grisPrincipal">#404040</color>
+    <color name="fondo">#000000</color>
+    <color name="colorPrimaryOverlay">#2f2f2f</color>
+    <color name="greenPrimary">#00C8E0</color>
+    <color name="greenSecondary">#00C8E0</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#6672FF</color>
+    <color name="blue2">#B8BDFA</color>
+    <color name="red">#CF3149</color>
+    <color name="oro">#dec773</color>
+    <color name="plata">#d4d5d5</color>
+    <color name="bronce">#ddad89</color>
+    <color name="polar">#e2f7f9</color>
+    <color name="stBlue">#a7dee7</color>
+    <color name="downy">#6bc5d1</color>
+    <color name="peloreus">#3ba1b5</color>
+    <color name="blueChill">#0d819c</color>
+    <color name="blanco_azul">#F1F5F9</color>
+    <color name="blanco_gris">#F6F6F8</color>
+
+
+</resources>

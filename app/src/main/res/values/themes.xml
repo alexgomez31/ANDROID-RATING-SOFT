@@ -1,0 +1,146 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+<!--    <style name="Theme.BaixoMinhoLeague" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
+<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/purple_500</item>-->
+<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/teal_200</item>-->
+<!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--    </style>-->
+    <style name="Theme.BaixoMinhoLeagueSinActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+       <item name="colorSurface">@color/blanco_gris</item>
+        <item name="colorSurfaceVariant">@color/blue2</item>
+        <item name="customColorValue">@color/white</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/grisPrincipal</item>
+        <item name="colorOnPrimary">@color/blue</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/greenSecondary</item>
+        <item name="colorSecondaryVariant">@color/blanco_gris</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <item name="colorTertiary">@color/white</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/blue</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.BaixoMinhoLeagueStartingSinActionBar" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/blue</item>
+     <!--   <item name="windowSplashScreenAnimatedIcon">@color/blue</item>
+        <item name="windowSplashScreenAnimationDuration">300</item> -->
+        <item name="postSplashScreenTheme">@style/Theme.BaixoMinhoLeagueSinActionBar</item>
+        <item name="android:statusBarColor">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+    </style>
+
+    <style name="fuentePrincipal">
+        <item name="fontFamily">@font/hurmegeometricsans4</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/grisPrincipal</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+    <style name="textRecyclerView">
+        <item name="android:fontFamily">@font/hurmegeometricsans4</item>
+        <item name="android:textColor">@color/grisPrincipal</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="TvSeparador">
+        <item name="android:fontFamily">@font/hurmebold</item>
+        <item name="android:background">@color/blanco_gris</item>
+        <item name="android:gravity">start</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="MyTextButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/DarkSecondari</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/hurmegeometricsans4</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+    <style name="TextViewError">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="fontFamily">@font/hurmegeometricsans4</item>
+        <item name="android:textSize">14.5dp</item>
+    </style>
+
+    <style name="TextViewIconError">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:text">*</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="fontFamily">@font/hurmegeometricsans4</item>
+    </style>
+    <style name="EditTextWhiteBackground">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@color/grisPrincipal</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:fontFamily">@font/hurmegeometricsans4</item>
+        <item name="android:textSize">16.5dp</item>
+    </style>
+    <style name="tvCorreo">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/hurme_light</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+    <style name="textoStyle">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/grisPrincipal</item>
+        <item name="android:gravity">start</item>
+        <item name="fontFamily">@font/hurmegeometricsans4</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+    <style name="textoStyleBold">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">start</item>
+        <item name="fontFamily">@font/hurmebold</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+    <style name="textoStyleBoldGreen">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">start</item>
+        <item name="fontFamily">@font/hurmebold</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+    <style name="fondoEventos">
+        <item name="android:background">@drawable/top_background</item>
+    </style>
+    <style name="fondoParticipantes">
+        <item name="android:background">@color/blue2</item>
+    </style>
+    <style name="fondoView">
+        <item name="android:background">@drawable/top_background</item>
+    </style>
+    <style name="textButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/grisPrincipal</item>
+    </style>
+</resources>
