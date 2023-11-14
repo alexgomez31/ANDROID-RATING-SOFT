@@ -6,11 +6,10 @@ plugins {
 }
 
 android {
-    namespace 'com.example.baixominholeague'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.baixominholeague"
+        applicationId "com.ratingsoft"
         vectorDrawables.useSupportLibrary = true
         minSdk 24
         targetSdk 33
@@ -33,14 +32,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding{
-        enabled=true
+    viewBinding {
+        enabled = true
     }
-
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     //ShapeableImageView
@@ -78,11 +75,4 @@ dependencies {
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
-
-
-
-
 }
-
-// Allow read/write access on all documents to any user signed in to the application
-
