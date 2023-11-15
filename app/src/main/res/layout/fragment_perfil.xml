@@ -261,7 +261,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textViewTituloTorneos"
-                        tools:text="Nombre completo del padre" />
+                        android:hint="Nombre completo de la padre" />
 
                     <TextView
                         android:id="@+id/textViewOtrosDatos"
