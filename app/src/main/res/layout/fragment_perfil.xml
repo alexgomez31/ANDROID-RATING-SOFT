@@ -39,7 +39,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/colorOnPrimary"
-                        android:fontFamily="@font/titulos"
+                        android:fontFamily="@font/hurmegeometricsans4"
                         android:gravity="center"
                         android:paddingTop="20dp"
                         android:paddingBottom="47dp"
