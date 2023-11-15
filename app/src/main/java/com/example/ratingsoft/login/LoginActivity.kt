@@ -10,7 +10,6 @@ import androidx.appcompat.app.AlertDialog
 import com.example.ratingsoft.MainActivity
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityLoginBinding
-
 import com.example.ratingsoft.login.ResetPassword.Companion.CLAVE_CORREO_RESET
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
