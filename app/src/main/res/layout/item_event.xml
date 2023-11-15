@@ -53,13 +53,13 @@
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvFecha"
-            tools:text="I Open de futbolín del Troya" />
+            tools:text="Nombre Estudiante" />
 
         <TextView
             android:id="@+id/tvPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Inscripción :"
+            tools:text="Documento identidad"
             style="@style/textoStyle"
             app:layout_constraintTop_toBottomOf="@id/tvEventName"
             app:layout_constraintStart_toStartOf="@id/tvEventName"/>
@@ -68,7 +68,7 @@
             android:id="@+id/tvInscripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="3 €"
+            tools:text="N°"
             style="@style/textoStyle"
             android:layout_marginStart="5dp"
             app:layout_constraintTop_toTopOf="@id/tvPrecio"
@@ -76,7 +76,7 @@
 
         <TextView
             android:id="@+id/tituloubicacion"
-            android:text="Ubicación:"
+            android:text="Grado"
             android:layout_marginTop="5dp"
             style="@style/textoStyle"
             android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
             android:id="@+id/tvUbicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Bar troya"
+            tools:text="Curso"
             android:layout_marginBottom="10dp"
            style="@style/textoStyle"
             android:layout_marginStart="5dp"
