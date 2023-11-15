@@ -71,7 +71,7 @@ dependencies {
     //Storage
     implementation 'com.google.firebase:firebase-storage:20.2.1'
     //imagenes
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.squareup.picasso:picasso:2.8'
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 

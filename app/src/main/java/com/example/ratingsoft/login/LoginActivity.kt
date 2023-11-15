@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+
 import com.example.ratingsoft.MainActivity
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityLoginBinding
