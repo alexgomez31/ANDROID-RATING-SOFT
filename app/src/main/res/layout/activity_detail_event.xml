@@ -72,7 +72,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             style="@style/textoStyleBold"
-                            tools:text="I OPEN DE FUTBOLIN"
+                            tools:text="Nombre Completo"
                             android:textSize="22dp"
                             android:paddingEnd="10dp"
                             android:layout_marginStart="20dp"
@@ -164,7 +164,7 @@
                             app:layout_constraintStart_toStartOf="@id/lineralayoutFecha"
                             app:layout_constraintTop_toBottomOf="@id/tvTituloEvent"
                             app:layout_constraintEnd_toEndOf="@id/lineralayoutFecha"
-                            tools:text="A Guarda" />
+                            tools:text="Dirección" />
 
 
 
@@ -183,7 +183,7 @@
 
                         <TextView
                             android:id="@+id/tvDescripcion"
-                            tools:text="Esto seria la descripcion del Evento en cuestion con todos sus respectivos datos "
+                            tools:text="Descripción Estudiante"
                             android:lineSpacingMultiplier="1.5"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
 
                         <TextView
                             android:id="@+id/tvInscripcion"
-                            android:text="Inscripción:"
+                            android:text="Grado"
                             android:textSize="16dp"
                             android:layout_marginTop="20dp"
                             android:layout_width="wrap_content"
@@ -222,7 +222,7 @@
 
                         <TextView
                             android:id="@+id/tvTituloPublicado"
-                            android:text="Publicado por:"
+                            android:text="Curso"
                             android:textSize="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                             android:id="@+id/btnParticipar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No Asistiré"
+                            android:text="Continuar"
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
                             android:layout_marginTop="60dp"
@@ -267,7 +267,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/hurmegeometricsans4"
-                            android:text="0 Participantes"
+                            android:text="Nombre"
                             android:drawableEnd="@drawable/arrow_drop"
                             android:textAllCaps="false"
                             app:layout_constraintEnd_toEndOf="@id/btnParticipar"

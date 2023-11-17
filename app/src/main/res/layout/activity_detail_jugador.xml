@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Jugador"
+                    android:text="Estudiante"
                     android:textColor="@color/white"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -103,7 +103,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="Alias" />
+                            tools:text="Info" />
 
                         <TextView
                             android:id="@+id/tvNombre"
@@ -168,7 +168,7 @@
                             style="@style/textoStyle"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tvLocalidad"
-                            tools:text="Posiciones" />
+                            tools:text="Grado" />
 
                         <TextView
                             android:id="@+id/tvOtros"
@@ -192,7 +192,7 @@
                             android:drawableStart="@drawable/copa"
                             android:drawablePadding="10dp"
                             style="@style/textoStyle"
-                            android:text="Torneos Disputados :"
+                            android:text="Calificaciones"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tvOtros" />
 
@@ -209,7 +209,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tvTituloTorneos"
-                            tools:text="● Torneo 1" />
+                            tools:text="● Curso" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

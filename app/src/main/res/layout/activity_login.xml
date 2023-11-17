@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
 
+
+
+
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,14 +27,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
+
+
+
                 <ProgressBar
                     android:id="@+id/progresBarLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="1dp"
-                    android:visibility="invisible"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
+                    android:elevation="1dp"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,11 +47,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/top_background1" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewLogin"
+                    app:srcCompat="@drawable/login1" />
 
                 <TextView
                     android:id="@+id/textViewLogin"
@@ -51,11 +60,13 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="-20dp"
                     android:fontFamily="@font/hurme_light"
-                    android:text="RATINGSOFT"
+                    android:text="INICIAR SESIÓN"
                     android:textSize="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageViewLogin" />
+
+
 
                 <EditText
                     android:id="@+id/editTextNombre"
@@ -156,6 +167,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -190,7 +202,13 @@
                         app:layout_constraintStart_toEndOf="@id/tvNewUser2"
                         app:layout_constraintTop_toTopOf="@id/tvNewUser2" />
 
+
                 </LinearLayout>
+
+
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

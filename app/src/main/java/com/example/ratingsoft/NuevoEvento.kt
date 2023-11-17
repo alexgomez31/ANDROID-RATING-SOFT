@@ -20,11 +20,11 @@ import com.example.ratingsoft.databinding.ActivityNuevoEventoBinding
 
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
-import com.google.firebase.database.FirebaseDatabase
 
 import java.util.*
 
