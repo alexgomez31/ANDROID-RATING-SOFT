@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu.Inicio
+package com.example.ratingsoft.ui.model.Inicio
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu.Inicio.recyclerViewParticipantes
+package com.example.ratingsoft.ui.model.Inicio.recyclerViewCurso
 
 import android.net.Uri
 import android.util.Log
@@ -6,23 +6,23 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ratingsoft.R
 
-import com.example.ratingsoft.data.Participante
+import com.example.ratingsoft.data.cursos
 import com.example.ratingsoft.databinding.ItemParticipanteBinding
 
 
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class ParticipanteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class CursosViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private var binding = ItemParticipanteBinding.bind(view)
 
-    fun bind(participante: Participante) {
-        binding.tvAliasParticipante.setText(participante.alias)
-        binding.tvNombreCompleto.setText(participante.nombreCompleto)
+    fun bind(cursos: cursos) {
+        binding.tvAliasParticipante.setText(cursos.descripción)
+        binding.tvNombreCompleto.setText(cursos.nombre)
         binding.progresBarParticipante.visibility = View.VISIBLE
 
-        val imagenUri = participante.imagen?.let { Uri.parse(it) }
+        val imagenUri = cursos.Acciones?.let { Uri.parse(it) }
 
         if (imagenUri != null && imagenUri.toString()!="") {
             Picasso.get().load(imagenUri).into(binding.imageViewProfileParticipante, object : Callback {

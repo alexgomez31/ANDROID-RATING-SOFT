@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/fondoParticipantes"
-    tools:context=".ui.menu.Inicio.ParticipantesActivity">
+    tools:context=".ui.model.Inicio.ParticipantesActivity">
 
     <ScrollView
         android:layout_width="match_parent"

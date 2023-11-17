@@ -18,15 +18,14 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ratingsoft.databinding.ActivityMainBinding
-import com.example.ratingsoft.ui.menu.ClasificacionFragment
-import com.example.ratingsoft.ui.menu.Inicio.InicioFragment
-import com.example.ratingsoft.ui.menu.Inicio.NovedadesFragment
-import com.example.ratingsoft.ui.menu.Jugadores.JugadoresFragment
-import com.example.ratingsoft.ui.menu.Perfil.PerfilFragment
+import com.example.ratingsoft.ui.model.ClasificacionFragment
+import com.example.ratingsoft.ui.model.Inicio.InicioFragment
+import com.example.ratingsoft.ui.model.Inicio.NovedadesFragment
+import com.example.ratingsoft.ui.model.Users.userssFragment
+import com.example.ratingsoft.ui.model.Perfil.PerfilFragment
 
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.*
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home -> {
                     showMainActivityContent()
                 }
-                R.id.Buscar -> replaceFragment(JugadoresFragment())
+                R.id.Buscar -> replaceFragment(userssFragment())
                 R.id.clasificacion -> replaceFragment(ClasificacionFragment())
                 R.id.perfil -> replaceFragment(fragmentPerfil)
             }

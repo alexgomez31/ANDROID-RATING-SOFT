@@ -1,6 +1,5 @@
-package com.example.ratingsoft.ui.menu.Inicio
+package com.example.ratingsoft.ui.model.Inicio
 
-import android.content.Context
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.net.Uri

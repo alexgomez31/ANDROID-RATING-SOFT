@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu.Jugadores
+package com.example.ratingsoft.ui.model.Users
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,24 +11,24 @@ import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 
-import com.example.ratingsoft.ui.menu.Jugadores.DetailJugador.Companion.ID_PLAYER
-import com.example.ratingsoft.data.Jugador
+import com.example.ratingsoft.ui.model.Users.DetailJugador.Companion.ID_PLAYER
+import com.example.ratingsoft.data.users
 import com.example.ratingsoft.databinding.FragmentJugadoresBinding
 
-import com.example.ratingsoft.recyclerViewJugadores.JugadorAdapter
+import com.example.ratingsoft.recyclerViewUsuarios.usersAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class JugadoresFragment : Fragment(), OnPlayerAddedListener {
+class userssFragment : Fragment(), OnPlayerAddedListener {
 
     private var _binding: FragmentJugadoresBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: JugadorAdapter
+    private lateinit var adapter: usersAdapter
     private var setupExecuted = false
-    private val jugadores = mutableListOf<Jugador>()
+    private val jugadores = mutableListOf<users>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +37,7 @@ class JugadoresFragment : Fragment(), OnPlayerAddedListener {
         _binding = FragmentJugadoresBinding.inflate(inflater,container,false)
         val view = binding.root
 
-        adapter = JugadorAdapter(jugadores){ idJugador -> navigateToDetailPlayer(idJugador) }
+        adapter = usersAdapter(jugadores){ idJugador -> navigateToDetailPlayer(idJugador) }
 
         setup()
         searchPlayer()
@@ -86,8 +86,8 @@ class JugadoresFragment : Fragment(), OnPlayerAddedListener {
 
                     if(!setupExecuted){
                         for (document in querySnapshot) {
-                            val jugador = document.toObject(Jugador::class.java)
-                            jugadores.add(jugador)
+                            val users = document.toObject(users::class.java)
+                            jugadores.add(users)
                         }
                         setupExecuted =true
                     }

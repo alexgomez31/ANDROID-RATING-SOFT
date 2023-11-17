@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu
+package com.example.ratingsoft.ui.model
 
 import android.graphics.Color
 import android.graphics.Typeface
@@ -16,7 +16,7 @@ import androidx.core.view.isVisible
 import com.example.ratingsoft.R
 
 
-import com.example.ratingsoft.data.Jugador
+import com.example.ratingsoft.data.users
 import com.example.ratingsoft.databinding.FragmentClasificacionBinding
 
 import com.google.firebase.firestore.FirebaseFirestore
@@ -123,7 +123,7 @@ class ClasificacionFragment : Fragment() {
     }
 
 
-    private fun saveData(jugadores: MutableList<Jugador>) {
+    private fun saveData(jugadores: MutableList<users>) {
         //Guarda la puntuacion de todos los jugadores
 
         val jugadoresPuntuacion = mutableListOf<HashMap<String, Serializable>>()
@@ -147,13 +147,13 @@ class ClasificacionFragment : Fragment() {
             val jugadoresCollectionRef = db.collection("jugadores")
 
             jugadoresCollectionRef.get().addOnSuccessListener {
-                val jugadores = mutableListOf<Jugador>()
+                val jugadores = mutableListOf<users>()
                 if (!setupExecuted) {
                     for (document in it) {
-                        val jugador = document.toObject(Jugador::class.java)
-                        if (jugador != null) {
+                        val users = document.toObject(users::class.java)
+                        if (users != null) {
 
-                            jugadores.add(jugador)
+                            jugadores.add(users)
                         }
                     }
                     setupExecuted = true

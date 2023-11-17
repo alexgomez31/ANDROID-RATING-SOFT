@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu.Perfil
+package com.example.ratingsoft.ui.model.Perfil
 
 import android.content.Context
 import android.content.Intent

@@ -2,7 +2,7 @@ package com.example.ratingsoft.data
 
 import com.google.firebase.firestore.PropertyName
 
-data class Jugador(
+data class users(
 
     @PropertyName("id") val id: Int? = null,
     @PropertyName("nombre") val nombre: String = "",

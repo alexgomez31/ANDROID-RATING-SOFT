@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu.Perfil
+package com.example.ratingsoft.ui.model.Perfil
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +10,11 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 
-import com.example.ratingsoft.data.Jugador
+import com.example.ratingsoft.data.users
 import com.example.ratingsoft.databinding.ActivityAddPlayerAndTournamentBinding
 
-import com.example.ratingsoft.ui.menu.Jugadores.JugadoresFragment
-import com.example.ratingsoft.ui.menu.Jugadores.OnPlayerAddedListener
+import com.example.ratingsoft.ui.model.Users.userssFragment
+import com.example.ratingsoft.ui.model.Users.OnPlayerAddedListener
 import com.google.firebase.firestore.FirebaseFirestore
 
 import java.io.Serializable
@@ -23,11 +23,11 @@ import java.util.*
 class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
 
     private lateinit var binding: ActivityAddPlayerAndTournamentBinding
-    private val jugadoresFragment = JugadoresFragment()
+    private val userssFragment = userssFragment()
     private val playerMatrix = mutableListOf<HashMap<String, Serializable>>()
     private val playerScores = HashMap<CheckBox, EditText>()
     private val db = FirebaseFirestore.getInstance()
-    private val jugadores = mutableListOf<Jugador>()
+    private val jugadores = mutableListOf<users>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +74,7 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun uiPlayers(jugadores: MutableList<Jugador>) {
+    private fun uiPlayers(jugadores: MutableList<users>) {
         binding.linearLayoutPlayers.removeAllViews()//eliminar la vista para actualizar
 
         val layoutParams = LinearLayout.LayoutParams(
@@ -179,10 +179,10 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
 
         jugadoresCollectionRef.get().addOnSuccessListener {
             for (document in it) {
-                val jugador = document.toObject(Jugador::class.java)
-                if (jugador != null) {
+                val users = document.toObject(users::class.java)
+                if (users != null) {
 
-                    jugadores.add(jugador)
+                    jugadores.add(users)
                 }
             }
             jugadores.sortBy { it.nombre }
@@ -223,7 +223,7 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
                             )
                             transaction.update(jugadorRef, "count", nextCount)
 
-                            jugadores.add(Jugador(jugadorId, nombreCapitalizado, correo))
+                            jugadores.add(users(jugadorId, nombreCapitalizado, correo))
                             jugadores.sortBy { it.nombre }
                             runOnUiThread {
                                 uiPlayers(jugadores)
@@ -258,7 +258,7 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
     }
 
     override fun onPlayerAdded() {
-            jugadoresFragment?.onPlayerAdded()
+            userssFragment?.onPlayerAdded()
     }
 
 }

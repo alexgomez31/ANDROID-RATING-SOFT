@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu.Inicio
+package com.example.ratingsoft.ui.model.Inicio
 
 import android.os.Bundle
 import android.util.Log
@@ -6,10 +6,10 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 
-import com.example.ratingsoft.data.Participante
+import com.example.ratingsoft.data.cursos
 import com.example.ratingsoft.databinding.ActivityParticipantesBinding
 
-import com.example.ratingsoft.ui.menu.Inicio.recyclerViewParticipantes.ParticipantesAdapter
+import com.example.ratingsoft.ui.model.Inicio.recyclerViewCurso.CursosAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -17,9 +17,9 @@ class ParticipantesActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityParticipantesBinding
-    private  lateinit var participanteAdapter: ParticipantesAdapter
+    private  lateinit var participanteAdapter: CursosAdapter
     private val db = FirebaseFirestore.getInstance()
-    private val participantesList = mutableListOf<Participante>()
+    private val participantesList = mutableListOf<cursos>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,19 +47,19 @@ class ParticipantesActivity : AppCompatActivity() {
 
                 for (document in querySnapshot.documents) {
                     // Obtén los datos de cada documento y crea un objeto Participante
-                    val alias = document.getString("alias")
+                    val descripción = document.getString("descripcion")
                     val nombre = document.getString("nombre")
-                    val imagen = document.getString("imagen")
+                    val acciones = document.getString("imagen")
 
-                    if (alias != null && nombre != null && imagen != null) {
-                        val participante = Participante(alias, nombre, imagen)
-                            participantesList.add(participante)
+                    if (descripción != null && nombre != null && acciones != null) {
+                        val cursos = cursos(descripción, nombre, acciones)
+                            participantesList.add(cursos)
 
                     }
                 }
 
                 // Configura el adaptador con los datos obtenidos
-                participanteAdapter = ParticipantesAdapter(participantesList)
+                participanteAdapter = CursosAdapter(participantesList)
                 binding.recyclerViewParticipantes.adapter = participanteAdapter
                 binding.recyclerViewParticipantes.layoutManager = LinearLayoutManager(this)
             }
@@ -85,7 +85,7 @@ class ParticipantesActivity : AppCompatActivity() {
     private fun searchByName(query: String) {
 
         val filteredJugadores = participantesList.filter { participante ->
-           participante.alias?.contains(query, ignoreCase = true) ?: false
+           participante.descripción?.contains(query, ignoreCase = true) ?: false
         }
         participanteAdapter.updateList(filteredJugadores)
 

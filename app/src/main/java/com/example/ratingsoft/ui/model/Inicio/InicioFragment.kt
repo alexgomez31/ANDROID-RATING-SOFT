@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu.Inicio
+package com.example.ratingsoft.ui.model.Inicio
 
 import android.content.Intent
 import android.icu.util.Calendar
@@ -11,9 +11,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 
-import com.example.ratingsoft.data.Evento
+import com.example.ratingsoft.data.TipoAsignatura
 import com.example.ratingsoft.databinding.FragmentInicioBinding
-import com.example.ratingsoft.recyclerViewEventos.EventoAdapter
+import com.example.ratingsoft.recyclerViewAsignatura.TipoAsignaturaAdapter
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -29,7 +29,7 @@ class InicioFragment : Fragment() {
     private val binding get() = _binding!!
     private val db = FirebaseFirestore.getInstance()
     private val storageRef = FirebaseStorage.getInstance().reference
-    private lateinit var eventoAdapter: EventoAdapter
+    private lateinit var tipoAsignaturaAdapter: TipoAsignaturaAdapter
     private val correo = FirebaseAuth.getInstance().currentUser?.email
 
 
@@ -43,19 +43,19 @@ class InicioFragment : Fragment() {
         binding.progresBarEvents.visibility=View.VISIBLE
         //eventoAdapter = EventoAdapter(emptyList(),::eliminarEvento){nombreEvento -> navigateToDetailEvent(nombreEvento) }
         ensureEventoAdapterInitialized()
-        binding.reyclerView.adapter = eventoAdapter
+        binding.reyclerView.adapter = tipoAsignaturaAdapter
         binding.reyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         if (correo != null) {
             getEventsOrderByDate(correo)
         }
-        Log.i("GABRI","SE CREOOOOO BIEN: ${eventoAdapter.toString()}")
+        Log.i("GABRI","SE CREOOOOO BIEN: ${tipoAsignaturaAdapter.toString()}")
         return view
     }
 
     fun ensureEventoAdapterInitialized() {
-        if (!::eventoAdapter.isInitialized) {
-            eventoAdapter = EventoAdapter(emptyList(),::eliminarEvento){nombreEvento -> navigateToDetailEvent(nombreEvento) }
+        if (!::tipoAsignaturaAdapter.isInitialized) {
+            tipoAsignaturaAdapter = TipoAsignaturaAdapter(emptyList(),::eliminarEvento){ nombreEvento -> navigateToDetailEvent(nombreEvento) }
         }
     }
     fun updateEventList(){
@@ -63,7 +63,7 @@ class InicioFragment : Fragment() {
 
         if (correo != null) {
             getEventsOrderByDate(correo)
-            eventoAdapter.notifyDataSetChanged()
+            tipoAsignaturaAdapter.notifyDataSetChanged()
         }
     }
     fun getEventsOrderByDate(correo: String) {
@@ -73,11 +73,11 @@ class InicioFragment : Fragment() {
         val currentDate = Calendar.getInstance().time
 
         query.get().addOnSuccessListener { document ->
-            val eventos = document.toObjects(Evento::class.java)
-            val filteredEventos = eventos.filter { evento ->
+            val tipoAsignaturas = document.toObjects(TipoAsignatura::class.java)
+            val filteredEventos = tipoAsignaturas.filter { evento ->
                 evento.fecha!! >= currentDate
             }
-            eventoAdapter.updateList(filteredEventos)
+            tipoAsignaturaAdapter.updateList(filteredEventos)
 
             for (evento in filteredEventos) {
                 if (evento.correo.equals(correo)) {
@@ -91,12 +91,12 @@ class InicioFragment : Fragment() {
             }
     }
 
-    private fun eliminarEvento(evento: Evento) {
+    private fun eliminarEvento(tipoAsignatura: TipoAsignatura) {
         val alertDialog = AlertDialog.Builder(requireContext())
             .setTitle("Confirmar eliminación")
             .setMessage("¿Estás seguro de que deseas borrar el evento?")
             .setPositiveButton("Sí") { dialog, which ->
-                evento.nombre?.let { nombreEvento ->
+                tipoAsignatura.nombre?.let { nombreEvento ->
                     val imageRef = storageRef.child("images/${nombreEvento.lowercase()}.jpg")
                     db.collection("eventos").document(nombreEvento.lowercase()).delete()
                         .addOnSuccessListener {

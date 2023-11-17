@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.menu.Jugadores
+package com.example.ratingsoft.ui.model.Users
 
 interface OnPlayerAddedListener {
     fun onPlayerAdded()

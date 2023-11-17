@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/fondoEventos"
-    tools:context=".ui.menu.Jugadores.DetailJugador">
+    tools:context=".ui.model.Users.DetailJugador">
 
     <ScrollView
         android:layout_width="match_parent"
