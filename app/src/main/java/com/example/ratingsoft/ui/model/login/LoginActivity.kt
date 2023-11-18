@@ -1,9 +1,9 @@
-package com.example.ratingsoft.login
+package com.example.ratingsoft.ui.model.login
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ratingsoft.Model.LoginResponse
+import com.example.ratingsoft.data.Model.LoginResponse
 import com.example.ratingsoft.databinding.ActivityLoginBinding
 import com.example.ratingsoft.network.ApiService
 import retrofit2.Call

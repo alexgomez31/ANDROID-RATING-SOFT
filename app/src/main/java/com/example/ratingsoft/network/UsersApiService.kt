@@ -1,6 +1,6 @@
 package com.example.ratingsoft.network
 
-import com.example.ratingsoft.Model.User
+import com.example.ratingsoft.data.Model.User
 import retrofit2.Call
 import retrofit2.http.GET
 

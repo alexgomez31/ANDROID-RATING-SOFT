@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityConfiguracionBinding
 
-import com.example.ratingsoft.login.LoginActivity
+import com.example.ratingsoft.ui.model.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 

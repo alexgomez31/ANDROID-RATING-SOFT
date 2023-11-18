@@ -1,9 +1,9 @@
-package com.example.ratingsoft.users
+package com.example.ratingsoft.ui.model.Users
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ratingsoft.Model.User
+import com.example.ratingsoft.data.Model.User
 import com.example.ratingsoft.R
 import com.example.ratingsoft.network.ApiService
 import retrofit2.Call

@@ -15,41 +15,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BaixoMinhoLeagueSinActionBar"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Cursos.ListaCursosActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.model.Perfil.Configuracion"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.model.Inicio.ParticipantesActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".login.ResetPassword"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:name=".ui.model.login.ResetPassword"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NuevoEvento"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.model.Inicio.DetailEvent"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.model.Perfil.AddPlayerAndTournament"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.model.Users.DetailJugador"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".ui.model.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BaixoMinhoLeagueStartingSinActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,13 +58,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.RegisterActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:name=".ui.model.login.RegisterActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

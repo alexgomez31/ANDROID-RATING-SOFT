@@ -1,4 +1,4 @@
-package com.example.ratingsoft.login
+package com.example.ratingsoft.ui.model.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
