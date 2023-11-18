@@ -20,7 +20,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.ratingsoft.NuevoEvento
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityMainBinding
-import com.example.ratingsoft.ui.ClasificacionFragment
 
 import com.example.ratingsoft.ui.Users.userssFragment
 import com.example.ratingsoft.ui.Perfil.PerfilFragment
@@ -104,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                     showMainActivityContent()
                 }
                 R.id.Buscar -> replaceFragment(userssFragment())
-                R.id.clasificacion -> replaceFragment(ClasificacionFragment())
+
                 R.id.perfil -> replaceFragment(fragmentPerfil)
             }
             true

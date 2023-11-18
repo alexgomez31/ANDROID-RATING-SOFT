@@ -3,9 +3,8 @@ package com.example.ratingsoft.ui.Users
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ratingsoft.data.Model.User
 import com.example.ratingsoft.R
-import com.example.ratingsoft.network.ApiService
+import com.example.ratingsoft.data.Model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,9 +34,9 @@ class UserActivity : AppCompatActivity() {
     }
 
     private fun getUsers() {
-        val call = apiService.getUsers()
+        val usersCall = apiService.getUsers()
 
-        call.enqueue(object : Callback<List<User>> {
+        usersCall.enqueue(object : Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 if (response.isSuccessful) {
                     val userList = response.body()
@@ -60,4 +59,8 @@ class UserActivity : AppCompatActivity() {
             }
         })
     }
+}
+
+private fun Any.enqueue(callback: Callback<List<User>>) {
+
 }
