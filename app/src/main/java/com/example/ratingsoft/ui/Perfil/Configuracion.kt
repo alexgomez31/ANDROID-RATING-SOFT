@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.model.Perfil
+package com.example.ratingsoft.ui.Perfil
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityConfiguracionBinding
 
-import com.example.ratingsoft.ui.model.login.LoginActivity
+import com.example.ratingsoft.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 

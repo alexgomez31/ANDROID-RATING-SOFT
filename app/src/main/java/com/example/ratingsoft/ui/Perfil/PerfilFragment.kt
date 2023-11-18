@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.model.Perfil
+package com.example.ratingsoft.ui.Perfil
 
 import android.app.Activity
 import android.content.Intent
@@ -16,16 +16,16 @@ import androidx.appcompat.app.AlertDialog
 
 import androidx.core.view.isVisible
 
-import com.example.ratingsoft.MainActivity
-import com.example.ratingsoft.MainActivity.Companion.CLAVE_ALIAS
+import com.example.ratingsoft.ui.main.MainActivity
+import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_ALIAS
 
-import com.example.ratingsoft.MainActivity.Companion.CLAVE_CORREO
-import com.example.ratingsoft.MainActivity.Companion.CLAVE_FOTO
-import com.example.ratingsoft.MainActivity.Companion.CLAVE_LOCALIDAD
-import com.example.ratingsoft.MainActivity.Companion.CLAVE_NOMBRE
-import com.example.ratingsoft.MainActivity.Companion.CLAVE_OTROS
-import com.example.ratingsoft.MainActivity.Companion.CLAVE_POSICIONES
-import com.example.ratingsoft.MainActivity.Companion.CLAVE_TELEFONO
+import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_CORREO
+import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_FOTO
+import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_LOCALIDAD
+import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_NOMBRE
+import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_OTROS
+import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_POSICIONES
+import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_TELEFONO
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.FragmentPerfilBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -106,7 +106,8 @@ class PerfilFragment : Fragment() {
     }
 
     private fun configuration(){
-        binding.buttomLogout.setOnClickListener { startActivity(Intent(requireContext(),Configuracion::class.java)) }
+        binding.buttomLogout.setOnClickListener { startActivity(Intent(requireContext(),
+            Configuracion::class.java)) }
     }
     fun launchImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)

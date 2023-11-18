@@ -1,11 +1,11 @@
-package com.example.ratingsoft.ui.model.login
+package com.example.ratingsoft.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import androidx.appcompat.app.AlertDialog
-import com.example.ratingsoft.MainActivity
+import com.example.ratingsoft.ui.main.MainActivity
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityRegisterBinding
 

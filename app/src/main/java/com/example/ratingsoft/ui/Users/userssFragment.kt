@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.model.Users
+package com.example.ratingsoft.ui.Users
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,11 +11,11 @@ import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 
-import com.example.ratingsoft.ui.model.Users.DetailJugador.Companion.ID_PLAYER
-import com.example.ratingsoft.data.users
+import com.example.ratingsoft.ui.Users.DetailJugador.Companion.ID_PLAYER
+import com.example.ratingsoft.data.Model.users
 import com.example.ratingsoft.databinding.FragmentJugadoresBinding
 
-import com.example.ratingsoft.recyclerViewUsuarios.usersAdapter
+import com.example.ratingsoft.util.usersAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.coroutines.CoroutineScope

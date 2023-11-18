@@ -19,7 +19,7 @@
             android:name=".Cursos.ListaCursosActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.model.Perfil.Configuracion"
+            android:name=".ui.Perfil.Configuracion"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -27,7 +27,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.model.login.ResetPassword"
+            android:name=".ui.login.ResetPassword"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -39,15 +39,15 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.model.Perfil.AddPlayerAndTournament"
+            android:name=".ui.Perfil.AddPlayerAndTournament"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.model.Users.DetailJugador"
+            android:name=".ui.Users.DetailJugador"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.model.login.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BaixoMinhoLeagueStartingSinActionBar">
@@ -58,11 +58,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.model.login.RegisterActivity"
+            android:name=".ui.login.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
     </application>

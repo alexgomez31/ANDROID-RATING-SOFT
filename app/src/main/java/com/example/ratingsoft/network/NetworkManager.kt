@@ -1,5 +1,6 @@
 package com.example.ratingsoft.network
 
+import com.example.ratingsoft.network.ApiService.UsersApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

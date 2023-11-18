@@ -1,4 +1,4 @@
-package com.example.ratingsoft
+package com.example.ratingsoft.ui.main
 
 import android.Manifest
 import android.content.Intent
@@ -17,11 +17,13 @@ import androidx.fragment.app.FragmentActivity
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.ratingsoft.NuevoEvento
+import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityMainBinding
-import com.example.ratingsoft.ui.model.ClasificacionFragment
+import com.example.ratingsoft.ui.ClasificacionFragment
 
-import com.example.ratingsoft.ui.model.Users.userssFragment
-import com.example.ratingsoft.ui.model.Perfil.PerfilFragment
+import com.example.ratingsoft.ui.Users.userssFragment
+import com.example.ratingsoft.ui.Perfil.PerfilFragment
 
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator

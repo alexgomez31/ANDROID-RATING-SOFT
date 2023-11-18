@@ -1,4 +1,4 @@
-package com.example.ratingsoft.recyclerViewAsignatura
+package com.example.ratingsoft.util
 data class TipoAsignatura(
     val id: Int,
     val nombre: String,

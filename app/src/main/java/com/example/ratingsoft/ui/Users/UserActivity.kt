@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.model.Users
+package com.example.ratingsoft.ui.Users
 
 import android.os.Bundle
 import android.util.Log

@@ -1,4 +1,4 @@
-package com.example.ratingsoft.network
+package com.example.ratingsoft.network.ApiService
 
 import com.example.ratingsoft.data.Model.User
 import retrofit2.Call

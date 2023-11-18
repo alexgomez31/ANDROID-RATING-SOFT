@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.model.Users
+package com.example.ratingsoft.ui.Users
 
 import android.content.ContentResolver
 import android.net.Uri

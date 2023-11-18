@@ -1,13 +1,13 @@
-package com.example.ratingsoft.recyclerViewUsuarios
+package com.example.ratingsoft.util
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ratingsoft.data.users
+import com.example.ratingsoft.data.Model.users
 import com.example.ratingsoft.databinding.ItemJugadorBinding
 
 
 
-class usersViewHolder(view: View):RecyclerView.ViewHolder(view) {
+class RecyclerViewUsuarios(view: View):RecyclerView.ViewHolder(view) {
 
     private val binding = ItemJugadorBinding.bind(view)
 

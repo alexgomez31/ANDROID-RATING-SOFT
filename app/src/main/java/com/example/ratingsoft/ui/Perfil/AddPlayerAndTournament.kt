@@ -1,4 +1,4 @@
-package com.example.ratingsoft.ui.model.Perfil
+package com.example.ratingsoft.ui.Perfil
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +10,11 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 
-import com.example.ratingsoft.data.users
+import com.example.ratingsoft.data.Model.users
 import com.example.ratingsoft.databinding.ActivityAddPlayerAndTournamentBinding
 
-import com.example.ratingsoft.ui.model.Users.userssFragment
-import com.example.ratingsoft.ui.model.Users.OnPlayerAddedListener
+import com.example.ratingsoft.ui.Users.userssFragment
+import com.example.ratingsoft.ui.Users.OnPlayerAddedListener
 import com.google.firebase.firestore.FirebaseFirestore
 
 import java.io.Serializable

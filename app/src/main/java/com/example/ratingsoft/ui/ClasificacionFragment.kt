@@ -1,11 +1,10 @@
-package com.example.ratingsoft.ui.model
+package com.example.ratingsoft.ui
 
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,20 +12,15 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import com.example.ratingsoft.R
-
-
-import com.example.ratingsoft.data.users
+import com.example.ratingsoft.data.Model.users
 import com.example.ratingsoft.databinding.FragmentClasificacionBinding
-
-import com.google.firebase.firestore.FirebaseFirestore
-
+import com.example.ratingsoft.ui.model._binding
+import com.example.ratingsoft.ui.model.binding
+import com.example.ratingsoft.ui.model.db
+import com.example.ratingsoft.ui.model.setupExecuted
 import java.io.Serializable
-
-private var _binding: FragmentClasificacionBinding? = null
-private val binding get() = _binding!!
-private var setupExecuted = false
-private val db = FirebaseFirestore.getInstance()
 
 class ClasificacionFragment : Fragment() {
 
@@ -63,10 +57,10 @@ class ClasificacionFragment : Fragment() {
 
         referencia.update(campoNuevo as Map<String, Any>)
             .addOnSuccessListener {
-                Log.i("Gabriel","Campo agregado correctamente")
+                Log.i("Gabriel", "Campo agregado correctamente")
             }
             .addOnFailureListener { exception ->
-                Log.i("Gabriel","Error al agregar el campo")
+                Log.i("Gabriel", "Error al agregar el campo")
             }
 
     }
@@ -99,10 +93,30 @@ class ClasificacionFragment : Fragment() {
 
 
             when (index) {
-                0 -> posicionCell2.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.oro))
-                1 -> posicionCell2.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.plata))
-                2 -> posicionCell2.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bronce))
-                else -> posicionCell2.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.blue2))
+                0 -> posicionCell2.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.oro
+                    )
+                )
+                1 -> posicionCell2.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.plata
+                    )
+                )
+                2 -> posicionCell2.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.bronce
+                    )
+                )
+                else -> posicionCell2.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.blue2
+                    )
+                )
             }
 
             fila.addView(posicionCell)
@@ -225,7 +239,7 @@ class ClasificacionFragment : Fragment() {
         textView.text = texto
         textView.typeface = Typeface.DEFAULT_BOLD
         textView.setTextColor(Color.WHITE)
-        textView.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.blue))
+        textView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.blue))
         textView.setPadding(30, 20, 30, 20)
         textView.gravity = Gravity.START // Alineación del texto al centro
         return textView
