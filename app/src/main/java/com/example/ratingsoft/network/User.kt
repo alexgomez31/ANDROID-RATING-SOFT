@@ -1,3 +1,3 @@
 package com.example.ratingsoft.network
 
-data class User(val email: String, val password: String)
+data class User(val id: String, val nombre: String, val correo: String)

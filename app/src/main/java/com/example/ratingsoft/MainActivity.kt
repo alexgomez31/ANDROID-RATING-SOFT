@@ -19,8 +19,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ratingsoft.databinding.ActivityMainBinding
 import com.example.ratingsoft.ui.model.ClasificacionFragment
-import com.example.ratingsoft.ui.model.Inicio.InicioFragment
-import com.example.ratingsoft.ui.model.Inicio.NovedadesFragment
+
 import com.example.ratingsoft.ui.model.Users.userssFragment
 import com.example.ratingsoft.ui.model.Perfil.PerfilFragment
 
@@ -131,9 +130,7 @@ class MainActivity : AppCompatActivity() {
         val viewPager: ViewPager2 = binding.viewPager
         val tabs: TabLayout = binding.tabs
 
-        val fragments = listOf(InicioFragment(), NovedadesFragment())
-        adapter = ViewPagerFragmentAdapter(this, fragments)
-        viewPager.adapter = adapter
+
 
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             when (position) {
