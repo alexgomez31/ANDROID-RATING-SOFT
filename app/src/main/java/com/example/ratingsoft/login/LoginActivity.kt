@@ -1,189 +1,66 @@
 package com.example.ratingsoft.login
 
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
-import android.view.View
-import androidx.appcompat.app.AlertDialog
-
-import com.example.ratingsoft.MainActivity
-import com.example.ratingsoft.R
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.example.ratingsoft.Model.LoginResponse
 import com.example.ratingsoft.databinding.ActivityLoginBinding
-import com.example.ratingsoft.login.ResetPassword.Companion.CLAVE_CORREO_RESET
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
-
+import com.example.ratingsoft.network.ApiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
-    private lateinit var googleClient: GoogleSignInClient
-    private val GOOGLE_SIGN_IN = 200
+    private val BASE_URL = "http://192.168.137.132:8000/api/"
+    private lateinit var apiService: ApiService
+    private lateinit var binding: ActivityLoginBinding  // Agrega esta línea
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Theme_BaixoMinhoLeagueSinActionBar)
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityLoginBinding.inflate(layoutInflater)  // Agrega esta línea
+        setContentView(binding.root)  // Agrega esta línea
 
-        //Analytics Event
-        val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        val bundle = Bundle()
-        bundle.putString("message", "Integracion de Firebase")
-        analytics.logEvent("InitScreen", bundle)
-
-
-        setup()
-        session()
-        showPassword()
-
-    }
-
-
-    private fun setup() {
-
-        binding.tvNewUser.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
-
-        binding.buttomLogin.setOnClickListener { login() }
-
-        binding.buttomGoogle.setOnClickListener { googleInit() }
-
-        binding.tvResetPassword.setOnClickListener { showResetPassword(binding.editTextNombre.text.toString()?:"") }
-
-
-    }
-
-    private fun googleInit() {
-
-        val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.prefs_file))
-            .requestEmail()
+        // Inicializar Retrofit
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        googleClient = GoogleSignIn.getClient(this, googleConf)
-        googleClient.signOut()
+        // Crear instancia del servicio
+        apiService = retrofit.create(ApiService::class.java)
 
-        startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+        // Llamar a la función de login
+        login("correo@example.com", "contraseña123")
     }
 
+    private fun login(email: String, password: String) {
+        val call = apiService.loginUser(email, password)
 
-    private fun session() {
-
-        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val correo = prefs.getString("email", null)
-
-        if (correo != null) {
-            showHome()
-        }
-    }
-
-    private fun login() {
-        if (checkEmpty(
-                binding.editTextNombre.text.toString(),
-                binding.editTextPassword.text.toString()
-            )
-        ) {
-            binding.progresBarLogin.visibility = View.VISIBLE
-            FirebaseAuth.getInstance()
-                .signInWithEmailAndPassword(
-                    binding.editTextNombre.text.toString(),
-                    binding.editTextPassword.text.toString()
-                ).addOnCompleteListener {
-                    binding.progresBarLogin.visibility = View.INVISIBLE
-                    if (it.isSuccessful) {
-                        showHome()
-
-                    } else {
-                        showAlert()
-
-                    }
+        call.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    val loginResponse = response.body()
+                    // Manejar la respuesta exitosa, por ejemplo, guardar el token en SharedPreferences
+                    val token = loginResponse?.token
+                    // También puedes navegar a la siguiente actividad (MainActivity)
+                    Log.d("LoginActivity", "Token: $token")
+                } else {
+                    // Manejar errores de autenticación
+                    Log.e("LoginActivity", "Error en la respuesta: ${response.code()}")
                 }
-                .addOnFailureListener { binding.progresBarLogin.visibility = View.INVISIBLE}
-        }
-    }
-
-    private fun showHome() {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
-    }
-
-    private fun showResetPassword(email: String?) {
-        val homeIntent: Intent = Intent(this, ResetPassword::class.java).apply {
-            putExtra(CLAVE_CORREO_RESET, email)
-        }
-        startActivity(homeIntent)
-    }
-
-    private fun showAlert() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error autenticando al usuario")
-        builder.setPositiveButton("Aceptar", null)
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    private fun checkEmpty(email: String, password: String): Boolean {
-        return email.isNotEmpty() && password.isNotEmpty()
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        binding.progresBarLogin.visibility = View.VISIBLE
-        if (requestCode == GOOGLE_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-
-            try {
-                val account = task.getResult(ApiException::class.java)
-
-                if (account != null) {
-
-                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                    FirebaseAuth.getInstance().signInWithCredential(credential)
-                        .addOnCompleteListener {
-                            binding.progresBarLogin.visibility = View.INVISIBLE
-                            if (it.isSuccessful) {
-                                showHome()
-                            } else {
-                                showAlert()
-                            }
-                        }
-                }
-            } catch (e: ApiException) {
-                binding.progresBarLogin.visibility = View.INVISIBLE
-                showAlert()
             }
 
-        }
-    }
-
-    private fun showPassword() {
-        var isPasswordVisible = false
-        val editextPassword = binding.editTextPassword
-        var inputType: Int
-
-        binding.btnshowPassword.setOnClickListener {
-            isPasswordVisible = !isPasswordVisible
-            if (isPasswordVisible) {
-                inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                binding.btnshowPassword.setImageResource(R.drawable.baseline_visibility_off_24)
-
-            } else {
-                inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
-                binding.btnshowPassword.setImageResource(R.drawable.outline_visibility_24)
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                // Manejar errores de red
+                Log.e("LoginActivity", "Error de red: ${t.message}")
             }
-
-            editextPassword.inputType = inputType
-            editextPassword.setSelection(editextPassword.text.length)
-        }
+        })
     }
+}
+
+private fun Any.enqueue(loginResponseCallback: Callback<LoginResponse>) {
+    TODO("Not yet implemented")
 }

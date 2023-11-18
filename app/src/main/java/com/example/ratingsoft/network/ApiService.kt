@@ -6,9 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface ApiService {
+
+interface ApiService{
     @POST("ruta/del/endpoint")
-    fun loginUser(@Body user: User): Call<ApiResponse> // Ajusta los tipos de datos según tu API
+    fun loginUser(@Body user: String, password: String): Call<ApiResponse> // Ajusta los tipos de datos según tu API
 }
 val retrofit = Retrofit.Builder()
     .baseUrl("http://192.168.137.132:8000/api/")

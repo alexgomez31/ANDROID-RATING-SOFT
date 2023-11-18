@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.ratingsoft.data.TipoAsignatura
 import com.example.ratingsoft.databinding.FragmentInicioBinding
-import com.example.ratingsoft.recyclerViewAsignatura.TipoAsignaturaAdapter
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
