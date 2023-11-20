@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ratingsoft.R
-import com.example.ratingsoft.data.Model.User
+import com.example.ratingsoft.data.Model.users
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,15 +36,15 @@ class UserActivity : AppCompatActivity() {
     private fun getUsers() {
         val usersCall = apiService.getUsers()
 
-        usersCall.enqueue(object : Callback<List<User>> {
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+        usersCall.enqueue(object : Callback<List<users>> {  // Corregir el tipo de datos a List<users>
+            override fun onResponse(call: Call<List<users>>, response: Response<List<users>>) {
                 if (response.isSuccessful) {
                     val userList = response.body()
                     // Verifica si la lista de usuarios no es nula antes de procesarla
                     userList?.let {
                         // Haz algo con la lista de usuarios, por ejemplo, mostrarlos en una lista
                         it.forEach { user ->
-                            Log.d("UserActivity", "Email: ${user.email}")
+                            Log.d("UserActivity", "Email: ${user.email}")  // Accede al campo email de la clase users
                         }
                     }
                 } else {
@@ -53,14 +53,10 @@ class UserActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+            override fun onFailure(call: Call<List<users>>, t: Throwable) {
                 // Manejar errores de red
                 Log.e("UserActivity", "Error de red: ${t.message}")
             }
         })
     }
-}
-
-private fun Any.enqueue(callback: Callback<List<User>>) {
-
 }

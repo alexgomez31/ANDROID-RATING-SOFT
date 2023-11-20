@@ -1,11 +1,12 @@
 package com.example.ratingsoft.ui.login
 
+// LoginActivity.kt
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ratingsoft.data.Model.LoginResponse
 import com.example.ratingsoft.databinding.ActivityLoginBinding
-import com.example.ratingsoft.ui.Users.ApiService
+import com.example.ratingsoft.network.ApiService.LoginApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,26 +15,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : AppCompatActivity() {
 
-    private val BASE_URL = "http://192.168.137.132:8000/api/"
-    private lateinit var apiService: ApiService
-    private lateinit var binding: ActivityLoginBinding  // Agrega esta línea
+    private val BASE_URL = "http://192.168.80.23:8000/"
+    private lateinit var apiService: LoginApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)  // Agrega esta línea
-        setContentView(binding.root)  // Agrega esta línea
+        val binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Inicializar Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // Crear instancia del servicio
-        apiService = retrofit.create(ApiService::class.java)
+        apiService = retrofit.create(LoginApiService::class.java)
 
-        // Llamar a la función de login
-        login("correo@example.com", "contraseña123")
+        // Maneja la lógica de tu interfaz de usuario aquí, por ejemplo, al hacer clic en un botón de inicio de sesión.
+        // Luego, llama a la función login con las credenciales del usuario.
+
+        // login("correo@example.com", "contraseña123")
     }
 
     private fun login(email: String, password: String) {
@@ -43,24 +43,20 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
-                    // Manejar la respuesta exitosa, por ejemplo, guardar el token en SharedPreferences
                     val token = loginResponse?.token
-                    // También puedes navegar a la siguiente actividad (MainActivity)
                     Log.d("LoginActivity", "Token: $token")
+
+                    // Aquí puedes manejar el éxito del inicio de sesión, como navegar a la siguiente actividad.
                 } else {
-                    // Manejar errores de autenticación
                     Log.e("LoginActivity", "Error en la respuesta: ${response.code()}")
+                    // Manejar errores de autenticación
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                // Manejar errores de red
                 Log.e("LoginActivity", "Error de red: ${t.message}")
+                // Manejar errores de red
             }
         })
     }
-}
-
-private fun Any.enqueue(loginResponseCallback: Callback<LoginResponse>) {
-    TODO("Not yet implemented")
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,12 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
-
-
-
                 <ProgressBar
-                    android:id="@+id/progresBarLogin"
+                    android:id="@+id/progressBarLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -56,16 +53,14 @@
                     android:layout_marginTop="-20dp"
                     android:fontFamily="@font/hurme_light"
                     android:text="INICIAR SESIÓN"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageViewLogin" />
 
-
-
                 <EditText
                     android:id="@+id/editTextNombre"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="40dp"
@@ -80,7 +75,7 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayoutPasswordLogin"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="40dp"
@@ -103,43 +98,40 @@
                         android:inputType="textPassword" />
 
                     <ImageButton
-                        android:id="@+id/btnshowPassword"
+                        android:id="@+id/btnShowPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:contentDescription="Mostrar/Ocultar contraseña"
-                        android:src="@drawable/outline_visibility_24" />
-
+                        app:srcCompat="@drawable/outline_visibility_24"
+                        app:layout_constraintTop_toBottomOf="@id/editTextPassword"
+                        app:layout_constraintEnd_toEndOf="parent" />
                 </LinearLayout>
 
                 <TextView
-
                     android:id="@+id/tvResetPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/hurmegeometricsans4"
-                    android:text="¿Has olvidadó la contraseña?"
-                    android:textSize="16dp"
+                    android:text="¿Has olvidado la contraseña?"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/linearLayoutPasswordLogin"
                     app:layout_constraintStart_toStartOf="@id/linearLayoutPasswordLogin"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayoutPasswordLogin" />
 
-
                 <LinearLayout
                     android:id="@+id/idLinearLayoutButtons"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
                     android:layout_marginTop="40dp"
-                    android:layout_marginEnd="50dp"
                     android:gravity="center"
                     app:layout_constraintEnd_toEndOf="@id/linearLayoutPasswordLogin"
                     app:layout_constraintStart_toStartOf="@id/linearLayoutPasswordLogin"
                     app:layout_constraintTop_toBottomOf="@id/tvResetPassword">
 
                     <Button
-                        android:id="@+id/buttomGoogle"
+                        android:id="@+id/buttonGoogle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/blue"
@@ -148,9 +140,8 @@
                         android:text="Google"
                         android:textColor="@color/white" />
 
-
                     <Button
-                        android:id="@+id/buttomLogin"
+                        android:id="@+id/buttonLogin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -161,8 +152,6 @@
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
-
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -177,13 +166,12 @@
                     app:layout_constraintTop_toBottomOf="@id/idLinearLayoutButtons">
 
                     <TextView
-
                         android:id="@+id/tvNewUser2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/hurmegeometricsans4"
                         android:text="¿No tienes una cuenta?"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvNewUser"
@@ -196,14 +184,7 @@
                         app:layout_constraintBottom_toBottomOf="@id/tvNewUser2"
                         app:layout_constraintStart_toEndOf="@id/tvNewUser2"
                         app:layout_constraintTop_toTopOf="@id/tvNewUser2" />
-
-
                 </LinearLayout>
-
-
-
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
