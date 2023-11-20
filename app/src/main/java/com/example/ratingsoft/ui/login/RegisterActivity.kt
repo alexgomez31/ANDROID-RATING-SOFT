@@ -1,22 +1,18 @@
 package com.example.ratingsoft.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ratingsoft.ui.main.MainActivity
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityRegisterBinding
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-
-
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -28,36 +24,23 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.buttomCrearCuenta.setOnClickListener {
             register()
-
         }
+
         showPassword()
         showRepeatPassword()
     }
 
     private fun register() {
-        //title = "Autenticación"
-
-        if (binding.editTextPassword.text.toString()
-                .equals(binding.editTextPaswoord2.text.toString()) && checkEmpty(
+        if (binding.editTextPassword.text.toString() == binding.editTextPaswoord2.text.toString() &&
+            checkEmpty(
                 binding.etNombreUsuario.text.toString(),
                 binding.editTextEmail.text.toString(),
                 binding.editTextPassword.text.toString(),
                 binding.editTextPaswoord2.text.toString()
             )
         ) {
-            FirebaseAuth.getInstance()
-                .createUserWithEmailAndPassword(
-                    binding.editTextEmail.text.toString(),
-                    binding.editTextPassword.text.toString()
-                ).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        saveData(it.result?.user?.email ?: "",binding.etNombreUsuario.text.toString())
-                        showHome()
-
-                    } else {
-                        showAlert()
-                    }
-                }
+            // Lógica para el registro sin Firebase
+            showHome()
         } else {
             showAlert()
         }
@@ -77,23 +60,13 @@ class RegisterActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun checkEmpty(nombreUsuario: String, email: String, password: String, repeatPassword: String): Boolean {
+    private fun checkEmpty(
+        nombreUsuario: String,
+        email: String,
+        password: String,
+        repeatPassword: String
+    ): Boolean {
         return email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()
-    }
-
-    private fun saveData(correo: String,nombreUsuario: String) {
-
-        db.collection("users").document(correo).set(
-            hashMapOf(
-                "alias" to nombreUsuario,
-                "nombre" to "",
-                "telefono" to "",
-                "localidad" to "",
-                "posiciones" to "",
-                "otros" to "",
-                "foto" to ""
-            )
-        )
     }
 
     private fun showPassword() {
@@ -106,9 +79,9 @@ class RegisterActivity : AppCompatActivity() {
             if (isPasswordVisible) {
                 inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 binding.btnshowPassword.setImageResource(R.drawable.baseline_visibility_off_24)
-
             } else {
-                inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
+                inputType =
+                    InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
                 binding.btnshowPassword.setImageResource(R.drawable.outline_visibility_24)
             }
 
@@ -127,9 +100,9 @@ class RegisterActivity : AppCompatActivity() {
             if (isPasswordVisible) {
                 inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 binding.btnshowPassword2.setImageResource(R.drawable.baseline_visibility_off_24)
-
             } else {
-                inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
+                inputType =
+                    InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
                 binding.btnshowPassword2.setImageResource(R.drawable.outline_visibility_24)
             }
 

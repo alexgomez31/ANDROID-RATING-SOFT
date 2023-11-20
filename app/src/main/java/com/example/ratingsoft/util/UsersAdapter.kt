@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ratingsoft.R
 
-import com.example.ratingsoft.data.Model.users
-import com.example.ratingsoft.util.RecyclerViewUsuarios
+import com.example.ratingsoft.data.model.User
 
 
-class usersAdapter(private var jugadores: List<users>, private val onItemSelected: (Int) -> Unit) : RecyclerView.Adapter<RecyclerViewUsuarios>() {
+class usersAdapter(private var jugadores: List<User>, private val onItemSelected: (Int) -> Unit) : RecyclerView.Adapter<RecyclerViewUsuarios>() {
 
-    fun updateList(jugadores: List<users>){
+    fun updateList(jugadores: List<User>){
         this.jugadores=jugadores
         notifyDataSetChanged()
         Log.i("GABRI","LISTA: ${jugadores.size}")

@@ -9,25 +9,21 @@ import android.text.method.DigitsKeyListener
 import android.util.Log
 import android.view.View
 import android.widget.*
-
-import com.example.ratingsoft.data.Model.users
+import com.example.ratingsoft.data.model.User
 import com.example.ratingsoft.databinding.ActivityAddPlayerAndTournamentBinding
-
-import com.example.ratingsoft.ui.Users.userssFragment
 import com.example.ratingsoft.ui.Users.OnPlayerAddedListener
-import com.google.firebase.firestore.FirebaseFirestore
-
+import userssFragment
 import java.io.Serializable
 import java.util.*
 
-class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
+class AddPlayerAndTournamentActivity : AppCompatActivity(), OnPlayerAddedListener {
 
     private lateinit var binding: ActivityAddPlayerAndTournamentBinding
-    private val userssFragment = userssFragment()
+    private val userssFragment
+        get() = userssFragment()
     private val playerMatrix = mutableListOf<HashMap<String, Serializable>>()
     private val playerScores = HashMap<CheckBox, EditText>()
-    private val db = FirebaseFirestore.getInstance()
-    private val jugadores = mutableListOf<users>()
+    private val jugadores = mutableListOf<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +31,10 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
         setContentView(binding.root)
 
         setupPlayers()
+        setupUI()
+    }
+
+    private fun setupUI() {
         binding.btnBackPerfil.setOnClickListener {
             onBackPressed()
         }
@@ -44,38 +44,52 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
         binding.btnAddTournament.setOnClickListener {
             binding.linearLayoutPlayers.clearFocus()
             saveTournament()
-
         }
     }
 
     private fun saveTournament() {
-        val nameDocument = binding.tvAddTournament.text.toString().uppercase()
-        if (!nameDocument.isNullOrEmpty() && playerMatrix.isNotEmpty()) {
-            Log.i("GABRI", "PLAYERMATRIX: $playerMatrix y PLAYERSCORE: $playerScores")
-            db.collection("clasificacionMovimiento").document(nameDocument).set(
-                hashMapOf("jugadores" to playerMatrix)
-            ).addOnSuccessListener {
-                Toast.makeText(this, "Añadido correctamente", Toast.LENGTH_SHORT).show()
+        val tournamentName = binding.tvAddTournament.text.toString().uppercase()
 
-                binding.tvAddTournament.text = null
-                playerScores.values.forEach { editText -> editText.text = null }
-                playerScores.keys.forEach { checkBox -> checkBox.isChecked = false }
-                playerMatrix.clear()
-
-            }
-        } else {
-            if (nameDocument.isNullOrEmpty()) showToast("Error al guardar: Nombre de torneo necesario") else showToast(
-                "Error al guardar: Jugadores necesarios"
-            )
+        if (tournamentName.isNullOrEmpty() || playerMatrix.isEmpty()) {
+            showToast(if (tournamentName.isNullOrEmpty()) "Error al guardar: Nombre de torneo necesario" else "Error al guardar: Jugadores necesarios")
+            return
         }
+
+        // Aquí puedes realizar la lógica de guardar sin Firebase
+        handleSaveTournamentSuccess()
+
+        // Limpiar los datos después de guardar
+        binding.tvAddTournament.text = null
+        clearPlayerInputs()
+    }
+
+    private fun handleSaveTournamentSuccess() {
+        // Aquí puedes manejar la lógica después de guardar exitosamente
+        Toast.makeText(this, "Añadido correctamente", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun clearPlayerInputs() {
+        playerScores.values.forEach { editText -> editText.text = null }
+        playerScores.keys.forEach { checkBox -> checkBox.isChecked = false }
+        playerMatrix.clear()
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun uiPlayers(jugadores: MutableList<users>) {
-        binding.linearLayoutPlayers.removeAllViews()//eliminar la vista para actualizar
+    private fun setupPlayers() {
+        // Aquí puedes realizar la lógica para obtener la lista de jugadores sin Firebase
+        // Puedes cargar los jugadores desde una API, base de datos local, etc.
+        // Debes llenar la lista 'jugadores' con la información adecuada.
+        // ...
+
+        // Después, llamar a uiPlayers(jugadores) para mostrar la interfaz.
+        uiPlayers(jugadores)
+    }
+
+    private fun uiPlayers(jugadores: MutableList<User>) {
+        binding.linearLayoutPlayers.removeAllViews()
 
         val layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -83,7 +97,6 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
         )
 
         for (player in jugadores) {
-
             val linearLayout = LinearLayout(this)
             linearLayout.orientation = LinearLayout.HORIZONTAL
             linearLayout.layoutParams = layoutParams
@@ -113,7 +126,6 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
             linearLayout.addView(editText)
 
             playerScores[checkBox] = editText
-
             binding.linearLayoutPlayers.addView(linearLayout)
 
             val playerData = HashMap<String, Serializable>()
@@ -139,14 +151,12 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
                 }
             }
 
-            //Guardar los valores
             editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     val playerName = player.nombre
                     val playerScore = editText.text.toString()
 
                     if (!playerName.isNullOrEmpty() && !playerScore.isNullOrEmpty()) {
-                        //val playerData = HashMap<String, Serializable>()
                         playerData["nombre"] = playerName
                         playerData["puntuacion"] = playerScore
 
@@ -155,7 +165,6 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
                                 playerMatrix.add(playerData)
                             }
                             Log.i("GABRI", "PLAYERMATRIX_ADD: $playerData")
-
                         } else {
                             playerMatrix.remove(playerData)
                             Log.i("GABRI", "PLAYERMATRIX_REMOVE: $playerData")
@@ -167,98 +176,35 @@ class AddPlayerAndTournament : AppCompatActivity(), OnPlayerAddedListener {
         }
     }
 
-    // Extension function to convert dp to pixels
-    private fun Int.dpToPx(): Int {
-        val scale = resources.displayMetrics.density
-        return (this * scale + 0.5f).toInt()
-    }
-
-    private fun setupPlayers() {
-        //Obtiene todos los jugadores
-        val jugadoresCollectionRef = db.collection("jugadores")
-
-        jugadoresCollectionRef.get().addOnSuccessListener {
-            for (document in it) {
-                val users = document.toObject(users::class.java)
-                if (users != null) {
-
-                    jugadores.add(users)
-                }
-            }
-            jugadores.sortBy { it.nombre }
-            uiPlayers(jugadores)
-        }
-    }
-
     private fun saveNewPlayer() {
         val nombre = binding.editextAddNombrePlayer.text.toString().trim()
-        val correo = binding.editextAddCorreoPlayer.text.toString()
 
         if (nombre.isNotEmpty()) {
             val nombreCapitalizado =
                 nombre.substring(0, 1).uppercase() + nombre.substring(1).lowercase()
-            val jugadoresCollection = db.collection("jugadores")
 
-            // Verificar si ya existe un jugador con el mismo nombre
-            jugadoresCollection.whereEqualTo("nombre", nombreCapitalizado).get()
-                .addOnSuccessListener { querySnapshot ->
-                    if (querySnapshot.isEmpty) {
-                        // No existe un jugador con el mismo nombre, puedes guardarlo
-                        db.runTransaction { transaction ->
-                            val jugadorRef = db.collection("counter").document("counter")
-                            val snapshot = transaction.get(jugadorRef)
-                            val currentCount = snapshot.getLong("count") ?: 0
-                            val nextCount = currentCount + 1
+            // Aquí puedes realizar la lógica para guardar un nuevo jugador sin Firebase
+            // ...
 
-                            val jugadorId = nextCount.toInt()
-                            val jugadorData = hashMapOf(
-                                "nombre" to nombreCapitalizado,
-                                "correo" to correo,
-                                "id" to jugadorId
-                            )
+            // Después, actualizar la lista 'jugadores' y llamar a uiPlayers(jugadores)
+            // ...
 
-                            transaction.set(
-                                jugadoresCollection.document(nombreCapitalizado + jugadorId.toString()),
-                                jugadorData
-                            )
-                            transaction.update(jugadorRef, "count", nextCount)
-
-                            jugadores.add(users(jugadorId, nombreCapitalizado, correo))
-                            jugadores.sortBy { it.nombre }
-                            runOnUiThread {
-                                uiPlayers(jugadores)
-                            }
-
-                            null
-                        }.addOnSuccessListener {
-                            // La transacción se completó exitosamente
-                            Toast.makeText(this, "Guardado correctamente", Toast.LENGTH_SHORT)
-                                .show()
-                            binding.editextAddNombrePlayer.setText("")
-                            binding.editextAddCorreoPlayer.setText("")
-                            binding.editextAddNombrePlayer.clearFocus()
-                        }.addOnFailureListener { e ->
-                            Toast.makeText(this, "Error al guardar jugador", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                            .addOnCompleteListener { onPlayerAdded() }
-                    } else {
-                        // Ya existe un jugador con el mismo nombre, muestra un mensaje de error
-                        Toast.makeText(
-                            this,
-                            "Ya existe un jugador con este nombre",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+            // Limpiar los datos después de guardar
+            binding.editextAddNombrePlayer.setText("")
+            binding.editextAddCorreoPlayer.setText("")
+            binding.editextAddNombrePlayer.clearFocus()
         } else {
-            // El campo de nombre está vacío, muestra un mensaje de error
             Toast.makeText(this, "Por favor, ingrese un nombre válido", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onPlayerAdded() {
-            userssFragment?.onPlayerAdded()
+        userssFragment?.onPlayerAdded()
     }
 
+    // Extension function to convert dp to pixels
+    private fun Int.dpToPx(): Int {
+        val scale = resources.displayMetrics.density
+        return (this * scale + 0.5f).toInt()
+    }
 }

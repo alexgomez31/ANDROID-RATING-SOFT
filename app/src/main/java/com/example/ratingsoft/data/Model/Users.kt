@@ -1,10 +1,8 @@
-package com.example.ratingsoft.data.Model
+package com.example.ratingsoft.data.model
 
-import com.google.firebase.firestore.PropertyName
-
-data class users(
-    @PropertyName("id") val id: Int? = null,
-    @PropertyName("nombre") val nombre: String = "",
-    @PropertyName("email") val email: String = "",
-    @PropertyName("puntuacion") val puntuacion: String? = ""
+class User(
+    val id: Int? = null,
+    val nombre: String = "",
+    val email: String = "",
+    val puntuacion: String? = ""
 )

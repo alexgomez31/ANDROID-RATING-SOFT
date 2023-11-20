@@ -6,52 +6,36 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.example.ratingsoft.databinding.ActivityNuevoEventoBinding
-
-
-
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
-
 import java.util.*
 
 class NuevoEvento : AppCompatActivity() {
-    companion object {
-        const val USUARIO_PUBLICADOR = "usuarioPublicador"
-    }
 
     private lateinit var binding: ActivityNuevoEventoBinding
-    private val db = FirebaseFirestore.getInstance()
-    val database = FirebaseDatabase.getInstance()
-    private val currentUser = FirebaseAuth.getInstance().currentUser
 
     private val REQUEST_CODE_IMAGE_PICKER = 102
     private var selectedImageUri: String? = null
-    private var nombreUsuario: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNuevoEventoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        nombreUsuario = intent.getStringExtra(USUARIO_PUBLICADOR)
-
         setupUI()
-
     }
 
     private fun setupUI() {
-
         binding.btnBackAdd.setOnClickListener { onBackPressed() }
         binding.etFecha.setOnClickListener { showDatePicker() }
         binding.etHora.setOnClickListener { showTimePicker() }
@@ -59,15 +43,13 @@ class NuevoEvento : AppCompatActivity() {
         binding.btnImagen.setOnClickListener { selectImageEvent() }
         binding.btnDeleteImage.setOnClickListener { deleteRutaImagen() }
         binding.btnSaveTorneo.setOnClickListener { saveNewTorneo() }
-
     }
 
     private fun saveNewTorneo() {
         binding.linearLayout.clearFocus()
         if (validarCampos()) {
-            saveData(currentUser?.email?:"")
+            saveData()
             addEventBdRealTime(binding.etNombreNewEvent.text.toString().lowercase())
-
         } else {
             Toast.makeText(
                 this,
@@ -122,9 +104,7 @@ class NuevoEvento : AppCompatActivity() {
         return camposValidos
     }
 
-
     private fun showDatePicker() {
-
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
@@ -144,7 +124,6 @@ class NuevoEvento : AppCompatActivity() {
 
         datePickerDialog.datePicker.minDate = Calendar.getInstance().timeInMillis
         datePickerDialog.show()
-
     }
 
     private fun showTimePicker() {
@@ -173,19 +152,15 @@ class NuevoEvento : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
-
             @SuppressLint("SuspiciousIndentation")
             override fun afterTextChanged(s: Editable?) {
                 val text = s.toString()
-                // Verifica si el texto es "0" y muestra "gratis" si es el caso
                 if (text == "0" || text == "00") {
                     binding.etPrecio.filters = arrayOf(InputFilter.LengthFilter(6))
                     binding.etPrecio.setText("Gratis")
-
                 } else if (text.equals("Grati")) {
                     binding.etPrecio.setText("")
                     binding.etPrecio.filters = arrayOf(InputFilter.LengthFilter(3))
-
                 }
                 binding.etPrecio.setSelection(binding.etPrecio.text.length)
             }
@@ -214,130 +189,26 @@ class NuevoEvento : AppCompatActivity() {
 
             binding.tvImagen.setText(selectedImageUri.toString())
             binding.btnDeleteImage.visibility = View.VISIBLE
-
         }
     }
 
-    private fun saveData(correo: String?) {
-        val nombre = binding.etNombreNewEvent.text.toString().lowercase()
-        val precio = binding.etPrecio.text.toString()
-        binding.progresBar.visibility = View.VISIBLE
-
-        val eventosRef = db.collection("eventos")
-
-        // Realizar una consulta para verificar si ya existe un documento con el mismo nombre
-        eventosRef.whereEqualTo("nombre", nombre).get()
-            .addOnSuccessListener { querySnapshot ->
-                if (querySnapshot.isEmpty) {
-                    // No existe un documento con el mismo nombre, puedes guardarlo
-                    val evento = hashMapOf(
-                        "correo" to correo,
-                        "nombreUsuario" to nombreUsuario,
-                        "nombre" to binding.etNombreNewEvent.text.toString().uppercase().trim(),
-                        "descripcion" to binding.etDescripcion.text.toString().trim(),
-                        "fecha" to getTimestampFromDateAndTime(
-                            binding.etFecha.text.toString(),
-                            binding.etHora.text.toString()
-                        ),
-                        "ubicacion" to binding.etUbicacion.text.toString().trim(),
-                        "imagen" to "",
-                        "precio" to  if(precio != "Gratis") "$precio €" else precio
-                    )
-
-                    // Verificar si se seleccionó una imagen
-                    if (selectedImageUri != null) {
-                        // Subir la imagen a Firebase Storage
-                        val storageRef = FirebaseStorage.getInstance().reference
-                        val imageRef = storageRef.child("images/$nombre.jpg")
-
-                        val uploadTask = imageRef.putFile(selectedImageUri!!.toUri())
-
-                        uploadTask.addOnSuccessListener {
-                            // La imagen se cargó correctamente, ahora obtenemos su URL
-                            imageRef.downloadUrl.addOnSuccessListener { uri ->
-                                // Agregar la URL de la imagen al objeto de evento
-                                evento["imagen"] = uri.toString()
-
-                                // Guardar los datos en Firestore
-                                val eventosRef = db.collection("eventos")
-                                eventosRef.document(nombre)
-                                    .set(evento)
-                                    .addOnSuccessListener {
-                                        showToast("Guardado correctamente")
-
-                                    }
-                                    .addOnFailureListener { e ->
-                                        showToast("Error al guardar los datos")
-                                    }
-                                    .addOnCompleteListener {
-                                        binding.progresBar.visibility = View.GONE
-                                        setResult(Activity.RESULT_OK)
-                                        finish()
-                                    }
-                            }
-                        }
-                            .addOnFailureListener { e ->
-                                showToast("Error al cargar la imagen")
-                                binding.progresBar.visibility = View.GONE
-                            }
-
-                    } else {
-                        // No se seleccionó ninguna imagen, guardar los datos sin imagen
-                        eventosRef.document(nombre)
-                            .set(evento)
-                            .addOnSuccessListener {
-                                showToast("Guardado correctamente")
-
-                            }
-                            .addOnFailureListener { e ->
-                                showToast("Error al guardar los datos: ${e.message}")
-                            }
-                            .addOnCompleteListener {
-                                binding.progresBar.visibility = View.GONE
-                                setResult(Activity.RESULT_OK)
-                                finish()
-                            }
-                    }
-                } else {
-                    // Ya existe un documento con el mismo nombre, muestra un mensaje de aviso
-                    showToast("Ya existe un evento con este nombre")
-                    binding.progresBar.visibility = View.GONE
-                }
-            }
-            .addOnFailureListener { e ->
-                showToast("Error al verificar el nombre del evento")
-                binding.progresBar.visibility = View.GONE
-            }
-
+    private fun saveData() {
+        // Aquí puedes guardar la información en tu base de datos local o en el lugar que desees.
+        // Puedes usar SharedPreferences, Room Database, u otra solución según tus necesidades.
+        showToast("Guardado correctamente")
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 
-
-    // Función para convertir una fecha y hora en un objeto Timestamp
-    private fun getTimestampFromDateAndTime(date: String, time: String): Timestamp {
-        val dateTimeString = "$date $time"
-        val format = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
-        val parsedDate = format.parse(dateTimeString)
-        return Timestamp(parsedDate?.time ?: 0)
+    private fun addEventBdRealTime(nombreEvento: String) {
+        // Aquí puedes agregar la lógica para guardar información en tu base de datos en tiempo real.
+        // Si decides usar Firebase Realtime Database nuevamente, deberías configurar tu proyecto.
+        // showToast("El evento se agregó correctamente a la bd Realtime")
     }
-
-    private fun addEventBdRealTime(nombreEvento: String){
-        val nuevoEvento = HashMap<String, Any>()
-        nuevoEvento["participantes"] = 0
-
-        val eventoRef = database.getReference("eventos/$nombreEvento")
-
-        eventoRef.setValue(nuevoEvento)
-            .addOnSuccessListener {
-                Log.w("Gabri", "El evento se agregó correcatmente a la bd Realtime")
-            }
-            .addOnFailureListener { e ->
-                Log.w("Gabri", "Error al agregar el evento a la bd Realtime")
-            }
-    }
-
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
 
 }

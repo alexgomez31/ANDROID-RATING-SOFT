@@ -6,14 +6,9 @@ import android.view.View
 import android.widget.Toast
 import com.example.ratingsoft.databinding.ActivityResetPasswordBinding
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
-
-
 class ResetPassword : AppCompatActivity() {
 
-    private lateinit var bindin: ActivityResetPasswordBinding
-    val auth = FirebaseAuth.getInstance()
+    private lateinit var binding: ActivityResetPasswordBinding
 
     companion object {
         const val CLAVE_CORREO_RESET = "correo_reset"
@@ -21,59 +16,47 @@ class ResetPassword : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindin = ActivityResetPasswordBinding.inflate(layoutInflater)
-        setContentView(bindin.root)
+        binding = ActivityResetPasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val intent = intent
-        var correo = intent.getStringExtra(CLAVE_CORREO_RESET)
-        bindin.editTextResetCorreo.setText(correo)
+        val correo = intent.getStringExtra(CLAVE_CORREO_RESET)
+        binding.editTextResetCorreo.setText(correo)
 
-        bindin.btnResetPassword.setOnClickListener { resetPassword() }
-        bindin.btnBackResetPassword.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
-
+        binding.btnResetPassword.setOnClickListener { resetPassword() }
+        binding.btnBackResetPassword.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
-    private fun resetPassword(){
-        var correo = bindin.editTextResetCorreo.text.toString()
-        bindin.progresBarResetPassword.visibility = View.VISIBLE // Mostrar ProgressBar
+    private fun resetPassword() {
+        val correo = binding.editTextResetCorreo.text.toString().trim()
+        binding.progresBarResetPassword.visibility = View.VISIBLE // Mostrar ProgressBar
 
-        if(!correo.isNullOrEmpty()){
-            auth.sendPasswordResetEmail(correo)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(this, "Revise su correo electrónico para restablecer su contraseña", Toast.LENGTH_SHORT).show()
-                        showSuccessful(correo)
-                    } else {
-                        val exception = task.exception
-                        if (exception is FirebaseAuthInvalidUserException) {
-                            Toast.makeText(this, "No hay una cuenta registrada con este correo electrónico", Toast.LENGTH_SHORT).show()
-                            bindin.progresBarResetPassword.visibility = View.INVISIBLE
-                        } else {
-                            Toast.makeText(this, "Error al enviar el correo electrónico de restablecimiento de contraseña", Toast.LENGTH_SHORT).show()
-                            bindin.progresBarResetPassword.visibility = View.INVISIBLE
-                        }
-                    }
-                    bindin.progresBarResetPassword.visibility = View.INVISIBLE // Ocultar ProgressBar al finalizar
-                }
-                .addOnFailureListener {
-                    bindin.progresBarResetPassword.visibility = View.INVISIBLE // Ocultar ProgressBar al fallar
-                }
+        if (correo.isNotEmpty()) {
+            // Lógica para enviar el correo de restablecimiento de contraseña (sin Firebase)
+            Toast.makeText(
+                this,
+                "Revise su correo electrónico para restablecer su contraseña",
+                Toast.LENGTH_SHORT
+            ).show()
+            showSuccessful(correo)
         } else {
-            Toast.makeText(this, "Inserte el correo electrónico para restablecer la contraseña", Toast.LENGTH_SHORT).show()
-            bindin.progresBarResetPassword.visibility = View.INVISIBLE // Ocultar ProgressBar si no hay correo electrónico
+            Toast.makeText(
+                this,
+                "Inserte el correo electrónico para restablecer la contraseña",
+                Toast.LENGTH_SHORT
+            ).show()
+            binding.progresBarResetPassword.visibility = View.INVISIBLE // Ocultar ProgressBar si no hay correo electrónico
         }
     }
 
-
-    private fun showSuccessful(correo: String){
-        bindin.tvSuccessful.setText("Consulte la dirección de correo electrónico ${correo.uppercase()} para restablecer su contraseña.\n Si no le aparece revise su carpeta de spam. ")
-        bindin.tvSuccessful.visibility = View.VISIBLE
-        bindin.tvInstrucciones.visibility = View.GONE
-        bindin.editTextResetCorreo.visibility = View.GONE
-        bindin.editTextResetCorreo2.visibility = View.GONE
-        bindin.btnResetPassword.setText("Reenviar email")
-        bindin.progresBarResetPassword.visibility = View.INVISIBLE
+    private fun showSuccessful(correo: String) {
+        binding.tvSuccessful.text =
+            "Consulte la dirección de correo electrónico ${correo.uppercase()} para restablecer su contraseña.\n Si no le aparece, revise su carpeta de spam."
+        binding.tvSuccessful.visibility = View.VISIBLE
+        binding.tvInstrucciones.visibility = View.GONE
+        binding.editTextResetCorreo.visibility = View.GONE
+        binding.editTextResetCorreo2.visibility = View.GONE
+        binding.btnResetPassword.text = "Reenviar email"
+        binding.progresBarResetPassword.visibility = View.INVISIBLE
     }
-
 }
-

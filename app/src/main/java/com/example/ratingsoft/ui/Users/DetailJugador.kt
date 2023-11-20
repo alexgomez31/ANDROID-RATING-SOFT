@@ -9,27 +9,22 @@ import android.view.View
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.ActivityDetailJugadorBinding
 
-
-import com.google.firebase.firestore.FirebaseFirestore
-
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
+import javax.security.auth.callback.Callback
 
 class DetailJugador : AppCompatActivity() {
     companion object {
         const val ID_PLAYER = "id_player"
     }
 
-    private var db = FirebaseFirestore.getInstance()
-    private var playerId: Int? = null
     private lateinit var binding: ActivityDetailJugadorBinding
+    private var playerId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailJugadorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        playerId = intent.getIntExtra(ID_PLAYER,-1)
+        playerId = intent.getIntExtra(ID_PLAYER, -1)
 
         getData()
 
@@ -39,127 +34,56 @@ class DetailJugador : AppCompatActivity() {
     }
 
     private fun getData() {
+        // Lógica para obtener datos (puedes reemplazar esto con tu propia lógica)
+        // ...
 
-        var collection = db.collection("jugadores")
+        // Ejemplo de configuración de UI con datos ficticios
+        val alias = "Alias"
+        val nombre = "Nombre"
+        val telefono = "123456789"
+        val correo = "correo@example.com"
+        val localidad = "Ciudad"
+        val posiciones = "1ª Posición, 2ª Posición, 3ª Posición"
+        val foto = "URL de la foto"
+        val otros = "Otros detalles"
 
-        collection.get().addOnSuccessListener { document ->
-
-            for (player in document) {
-                var correo = player.getString("correo")
-                var nombre = player.getString("nombre")
-                var id = player.getLong("id")?.toInt()
-
-                if(playerId==id){
-                    if (correo != null && nombre!=null) {
-                        getDataEmail(correo)
-                        loadPositions(nombre)
-
-                    }
-                }
-            }
-
-        }.addOnFailureListener { exception ->
-                Log.i("GAB","Error al acceder")
-            }
-    }
-
-    private fun getDataEmail(correo: String) {
-        var userCollection = db.collection("users")
-
-        userCollection.get()
-            .addOnSuccessListener { result ->
-                var documentExist = false
-                for (document in result) {
-                    if(document.id==correo){
-                        documentExist = true
-                        var alias = document.getString("alias")
-                        var nombre = document.getString("nombre")
-                        var localidad = document.getString("localidad")
-                        var posiciones = document.getString("posiciones")
-                        var telefono = document.getString("telefono")
-                        var foto = document.getString("foto")
-                        var otros = document.getString("otros")
-
-                        if(alias !=null && nombre!=null && localidad!=null && posiciones!=null && telefono!=null && foto!=null && otros !=null){
-                            setupUi(alias,nombre,telefono,correo,localidad,posiciones,foto,otros)
-
-                        }
-                    }
-                    if(!documentExist){
-                        val defaultFotoUri = Uri.parse(
-                            ContentResolver.SCHEME_ANDROID_RESOURCE +
-                                    "://" + resources.getResourcePackageName(R.drawable.profile) +
-                                    "/" + resources.getResourceTypeName(R.drawable.profile) +
-                                    "/" + resources.getResourceEntryName(R.drawable.profile)
-                        )
-                        setupUi("","","",correo ,"","",defaultFotoUri.toString(),"")
-                    }
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.i("GAB","Error al acceder")
-            }
-
+        setupUi(alias, nombre, telefono, correo, localidad, posiciones, foto, otros)
     }
 
     private fun setupUi(alias: String, nombre: String, telefono: String, correo: String, localidad: String, posiciones: String, foto: String, otros: String) {
+//        if (!foto.isNullOrEmpty()) {
+//            Picasso.get().load(Uri.parse(foto)).into(binding.myCircleImageView, object :
+//                Callback {
+//                override fun onSuccess() {
+//                    binding.ProgresBarImageView.visibility = View.GONE
+//                }
 
-        if(!foto.isNullOrEmpty()){
-            Picasso.get().load(Uri.parse(foto)).into(binding.myCircleImageView, object :
-                Callback {
-                override fun onSuccess() {
-                    binding.ProgresBarImageView.visibility = View.GONE
-                }
+//                override fun onError(e: Exception?) {
+//                    binding.ProgresBarImageView.visibility = View.GONE
+//                    Log.i("Gabri", "Error al cargar la imagen: $e")
+//                }
+//            })
+//        }
 
-                override fun onError(e: Exception?) {
-                    binding.ProgresBarImageView.visibility = View.GONE
-                    Log.i("Gabri", "Error al cargar la imagen: $e")
-                }
-            })
-
-        }
-        binding.tvAlias.setText(alias)
-        binding.tvNombre.setText(nombre)
-        binding.tvTelefono.setText(telefono)
-        binding.tvCorreo.setText(correo)
-        binding.tvLocalidad.setText(localidad)
-        binding.tvOtros.setText(otros)
-        binding.tvPosiciones.setText(posiciones)
-
-    }
-
-    private fun loadPositions(nombreJugadorBuscado: String) {
-        val collectionRef = db.collection("clasificacionMovimiento")
-        val stringBuilder = StringBuilder()
-        val separador = "◈ "
-
-        collectionRef.get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val nombreDocumento = document.id
-                    val matrizJugadores = document.get("jugadores") as ArrayList<HashMap<String, Any>>
-
-                    for (jugador in matrizJugadores) {
-
-                        val nombreJugador = jugador["nombre"] as String
-                        val puntuacionJugador = jugador["puntuacion"] as String
-                        val puntuacionJugadorInt = puntuacionJugador.toInt()
-
-                        if (nombreJugador == nombreJugadorBuscado && puntuacionJugadorInt > 0) {
-
-                            when(puntuacionJugadorInt){
-                                25 -> stringBuilder.append(separador).append(nombreDocumento).append("  -  ").append("1ª Posición").appendLine().append("\n")
-                                18 -> stringBuilder.append(separador).append(nombreDocumento).append("  -  ").append("2ª Posición").appendLine().append("\n")
-                                10 -> stringBuilder.append(separador).append(nombreDocumento).append("  -  ").append("3ª Posición").appendLine().append("\n")
-                                else ->  stringBuilder.append(separador).append(nombreDocumento).appendLine().append("\n")
-                            }
-                        }
-                    }
-                    binding.tvTorneosDisputados.text=stringBuilder.toString()
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.i("GAB","Error al acceder")
-            }
-    }
-}
+//        binding.tvAlias.text = alias
+//        binding.tvNombre.text = nombre
+//        binding.tvTelefono.text = telefono
+//        binding.tvCorreo.text = correo
+//        binding.tvLocalidad.text = localidad
+//        binding.tvOtros.text = otros
+//        binding.tvPosiciones.text = posiciones
+//
+//        // Lógica para cargar posiciones (puedes reemplazar esto con tu propia lógica)
+//        // ...
+//
+//        // Ejemplo de posiciones ficticias
+//        val stringBuilder = StringBuilder()
+//        val separador = "◈ "
+//        stringBuilder.append(separador).append("Torneo1  -  1ª Posición").appendLine().append("\n")
+//        stringBuilder.append(separador).append("Torneo2  -  2ª Posición").appendLine().append("\n")
+//        stringBuilder.append(separador).append("Torneo3  -  3ª Posición").appendLine().append("\n")
+//
+//        binding.tvTorneosDisputados.text = stringBuilder.toString()
+//    }
+//}
+    }}
