@@ -5,13 +5,15 @@ plugins {
 }
 
 android {
+
     namespace = "com.example.ratingsoft"
     compileSdk 34
+
 
     defaultConfig {
         applicationId "com.example.ratingsoft"
         vectorDrawables.useSupportLibrary = true
-        minSdk 24
+        minSdkVersion 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -68,4 +70,5 @@ dependencies {
 
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
 }
