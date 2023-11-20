@@ -1,6 +1,9 @@
 package com.example.ratingsoft.ui.login
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a4103eb51c5eb0dab74a60d2bd1fe38eef07c5df
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -32,8 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Maneja la lógica de tu interfaz de usuario aquí, por ejemplo, al hacer clic en un botón de inicio de sesión.
         // Luego, llama a la función login con las credenciales del usuario.
-
-        // login("correo@example.com", "contraseña123")
+        login("correo@example.com", "contraseña123")
     }
 
     private fun login(email: String, password: String) {

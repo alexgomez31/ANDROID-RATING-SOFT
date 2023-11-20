@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.google.gms.google-services'
 }
 
 android {
@@ -41,14 +40,13 @@ android {
     }
 }
 
-
 dependencies {
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.google.code.gson:gson:2.10.1")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.google.code.gson:gson:2.10.1"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
     //ShapeableImageView
     implementation 'com.google.android.material:material:1.9.0'
@@ -62,31 +60,14 @@ dependencies {
     //corrutinas
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'com.google.android.gms:play-services-cast-framework:21.3.0'
-    implementation 'com.google.firebase:firebase-database-ktx:20.2.2'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    //firebase
-    implementation platform('com.google.firebase:firebase-bom:31.5.0')
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.3.0'
-    //firebase Authentication
-    implementation platform('com.google.firebase:firebase-bom:31.4.0')
-    implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
-    //login Google
-    implementation 'com.google.android.gms:play-services-auth:20.5.0'
-    //Firestore
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.6.1'
-    //Storage
-    implementation 'com.google.firebase:firebase-storage:20.2.1'
-    //imagenes
-    implementation 'com.squareup.picasso:picasso:2.8'
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     //Retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
 }
