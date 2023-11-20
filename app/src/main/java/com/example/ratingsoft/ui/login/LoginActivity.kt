@@ -1,9 +1,6 @@
 package com.example.ratingsoft.ui.login
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a4103eb51c5eb0dab74a60d2bd1fe38eef07c5df
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity

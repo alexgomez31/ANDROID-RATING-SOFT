@@ -5,12 +5,13 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdkVersion 34
+
 
     defaultConfig {
         applicationId "com.ratingsoft"
         vectorDrawables.useSupportLibrary = true
-        minSdk 24
+        minSdkVersion 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -67,7 +68,5 @@ dependencies {
 
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    //Retrofit2
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
 }
