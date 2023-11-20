@@ -1,6 +1,6 @@
 package com.example.ratingsoft.ui.login
 
-// LoginActivity.kt
+
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
