@@ -5,10 +5,11 @@ plugins {
 }
 
 android {
+    namespace = "com.example.ratingsoft"
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.ratingsoft"
+        applicationId "com.example.ratingsoft"
         vectorDrawables.useSupportLibrary = true
         minSdk 24
         targetSdk 33
@@ -67,7 +68,4 @@ dependencies {
 
     //ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    //Retrofit2
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }
