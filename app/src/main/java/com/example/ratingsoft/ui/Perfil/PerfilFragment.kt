@@ -9,18 +9,14 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import com.example.ratingsoft.ui.main.MainActivity
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.FragmentPerfilBinding
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_ALIAS
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_CORREO
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_FOTO
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_LOCALIDAD
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_NOMBRE
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_OTROS
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_POSICIONES
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_TELEFONO
+
+
 
 class PerfilFragment : Fragment() {
 
@@ -47,14 +43,9 @@ class PerfilFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            correo = it.getString(CLAVE_CORREO)
-            alias = it.getString(CLAVE_ALIAS)
-            nombre = it.getString(CLAVE_NOMBRE)
-            telefono = it.getString(CLAVE_TELEFONO)
-            localidad = it.getString(CLAVE_LOCALIDAD)
-            posiciones = it.getString(CLAVE_POSICIONES)
-            otros = it.getString(CLAVE_OTROS)
-            foto = it.getString(CLAVE_FOTO)
+
+
+
         }
     }
 
@@ -65,30 +56,24 @@ class PerfilFragment : Fragment() {
         _binding = FragmentPerfilBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.btnSelectImage.setOnClickListener {
-            val mainActivity = requireActivity() as MainActivity
-            launchImagePicker()
-            if (mainActivity.arePermissionsGranted()) {
-                Log.i("GAB", "Los permisos están concedidos")
-            } else {
-                mainActivity.requestPermissions()
-                Log.i("GAB", "Los permisos no están concedidos")
-            }
-        }
 
         binding.btnAddPlayer.setOnClickListener {
             startActivity(Intent(requireContext(), AddPlayerAndTournamentActivity::class.java))
         }
+
+//        setupUi()
+//        showMenuEdit()
+//        saveData()
+//        deleteData()
 
         configuration()
 
         return view
     }
 
-    private fun configuration() {
-        binding.buttomLogout.setOnClickListener {
-            startActivity(Intent(requireContext(), Configuracion::class.java))
-        }
+    private fun configuration(){
+        binding.buttomLogout.setOnClickListener { startActivity(Intent(requireContext(),
+            Configuracion::class.java)) }
     }
 
     fun launchImagePicker() {
@@ -97,11 +82,116 @@ class PerfilFragment : Fragment() {
         startActivityForResult(intent, REQUEST_CODE_IMAGE_PICKER)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_IMAGE_PICKER && resultCode == Activity.RESULT_OK && data != null) {
-            selectedImageUri = data.data.toString()
-            // showSelectedImage(selectedImageUri!!)
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_CODE_IMAGE_PICKER && resultCode == Activity.RESULT_OK && data != null) {
+//            selectedImageUri = data.data.toString()
+//            showSelectedImage(selectedImageUri!!)
         }
-    }
-}
+//    }
+//
+////    private fun showSelectedImage(imageUri: String) {
+////        .get().load(Uri.parse(imageUri))
+////            .into(binding.imageViewProfile)
+////    }
+//
+//    private fun loadEmail(correo: String) {
+//        // Lógica para cargar el correo (puedes reemplazar esto con tu propia lógica)
+//    }
+//
+//    private fun setupUi() {
+//        binding.textViewCorreo.text = correo
+//        binding.editTextAlias.setText(alias)
+//        binding.editTextNombre.setText(nombre)
+//        binding.editTextTelefono.setText(telefono)
+//        binding.editTextLocalidad.setText(localidad)
+//        binding.editTextOtrosDatos.setText(otros)
+//        binding.editTextPosiciones.setText(posiciones)
+//
+//        if (correo.equals(CORREO_ADMIN)) {
+//            binding.textViewTituloTorneos.visibility = View.GONE
+//            binding.btnAddPlayer.visibility = View.VISIBLE
+//        }
+//
+//        if (selectedImageUri != "") {//Para que al cambiar la imagen se actualice (solo entra si se cambia la imagen)
+//            selectedImageUri = Uri.parse(selectedImageUri).toString()
+//            Picasso.get().load(selectedImageUri)
+//                .into(binding.imageViewProfile)
+//        } else if (foto != "") { //Cargar la imagen de perfil guardada
+//            selectedImageUri = Uri.parse(foto).toString()
+//            Picasso.get().load(selectedImageUri)
+//                .into(binding.imageViewProfile)
+//        }
+//
+//        loadEmail(correo.toString())
+//    }
+//
+//    private fun saveData() {
+//        binding.save.setOnClickListener {
+//            // Lógica para guardar datos (puedes reemplazar esto con tu propia lógica)
+//            Toast.makeText(requireContext(), "Guardado correctamente", Toast.LENGTH_SHORT).show()
+//        }
+//    }
+//
+//    private fun deleteData() {
+//        binding.delet.setOnClickListener {
+//            showDeleteConfirmationDialog()
+//        }
+//    }
+//
+//    private fun showDeleteConfirmationDialog() {
+//        val alertDialog = AlertDialog.Builder(requireContext())
+//            .setTitle("Confirmar eliminación")
+//            .setMessage("¿Estás seguro de que deseas borrar los datos?")
+//            .setPositiveButton("Sí") { dialog, which ->
+//                // Lógica para eliminar datos (puedes reemplazar esto con tu propia lógica)
+//                clearEditTexts()
+//            }
+//            .setNegativeButton("No", null)
+//            .create()
+//
+//        alertDialog.show()
+//    }
+//
+//    private fun clearEditTexts() {
+//        binding.editTextAlias.text.clear()
+//        binding.editTextNombre.text.clear()
+//        binding.editTextTelefono.text.clear()
+//        binding.editTextLocalidad.text.clear()
+//        binding.editTextPosiciones.text.clear()
+//        binding.editTextOtrosDatos.text.clear()
+//    }
+//
+//    private fun showMenuEdit() {
+//        binding.buttomMenuEdit.setOnClickListener {
+//            if (!binding.save.isVisible) {
+//                binding.save.show()
+//                binding.delet.show()
+//                binding.buttomMenuEdit.setImageResource(R.drawable.edit_off_24)
+//                enableEditTexts(true)
+//            } else {
+//                binding.save.hide()
+//                binding.delet.hide()
+//                binding.buttomMenuEdit.setImageResource(R.drawable.edit_24)
+//                enableEditTexts(false)
+//            }
+//        }
+//    }
+//
+//    private fun enableEditTexts(enable: Boolean) {
+//        binding.btnSelectImage.isVisible = enable
+//        binding.editTextAlias.isEnabled = enable
+//        binding.editTextNombre.isEnabled = enable
+//        binding.editTextTelefono.isEnabled = enable
+//        binding.editTextLocalidad.isEnabled = enable
+//        binding.editTextPosiciones.isEnabled = enable
+//        binding.editTextOtrosDatos.isEnabled = enable
+//        binding.editeTextEdicion.isVisible = enable
+//    }
+//
+//    // Resto del código
+//}
+//
+//private fun CharSequence.clear() {
+//    TODO("Not yet implemented")
+//}
