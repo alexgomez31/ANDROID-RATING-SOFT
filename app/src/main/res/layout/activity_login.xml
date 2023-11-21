@@ -104,12 +104,11 @@
                         android:id="@+id/btnShowPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/outline_visibility_24"
+                        android:background="?attr/selectableItemBackground"
                         android:contentDescription="Mostrar/Ocultar contraseña"
-                        android:layout_marginTop="10dp"
+                        android:src="@drawable/outline_visibility_24"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
-
                 </LinearLayout>
 
                 <TextView
@@ -133,6 +132,7 @@
                     app:layout_constraintEnd_toEndOf="@id/linearLayoutPasswordLogin"
                     app:layout_constraintStart_toStartOf="@id/linearLayoutPasswordLogin"
                     app:layout_constraintTop_toBottomOf="@id/tvResetPassword">
+
 
 
                     <Button
@@ -160,7 +160,6 @@
                     app:layout_constraintStart_toStartOf="@id/idLinearLayoutButtons"
                     app:layout_constraintTop_toBottomOf="@id/idLinearLayoutButtons"
                     android:orientation="horizontal">
-
 
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

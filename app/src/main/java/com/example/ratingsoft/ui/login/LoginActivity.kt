@@ -14,7 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : AppCompatActivity() {
 
-    private val BASE_URL = "http://10.185.208.43:8000/login"
+    private val BASE_URL = "http://10.185.208.43:8000/api/"
+
     private lateinit var apiService: LoginApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
