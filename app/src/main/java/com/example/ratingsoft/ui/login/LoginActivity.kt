@@ -22,18 +22,22 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        apiService = retrofit.create(LoginApiService::class.java)
+        setupRetrofit()
 
         // Maneja la lógica de tu interfaz de usuario aquí, por ejemplo, al hacer clic en un botón de inicio de sesión.
         // Luego, llama a la función login con las credenciales del usuario.
         binding.buttonLogin.setOnClickListener {
             login(binding.editTextNombre.text.toString(), binding.editTextPassword.text.toString())
         }
+    }
+
+    private fun setupRetrofit() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        apiService = retrofit.create(LoginApiService::class.java)
     }
 
     private fun login(email: String, password: String) {
@@ -44,19 +48,23 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     val token = loginResponse?.token
-                    Log.d("LoginActivity", "Token: $token")
+                    Log.d(TAG, "Token: $token")
 
                     // Aquí puedes manejar el éxito del inicio de sesión, como navegar a la siguiente actividad.
                 } else {
-                    Log.e("LoginActivity", "Error en la respuesta: ${response.code()}")
+                    Log.e(TAG, "Error en la respuesta: ${response.code()}")
                     // Manejar errores de autenticación
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("LoginActivity", "Error de red: ${t.message}")
+                Log.e(TAG, "Error de red: ${t.message}")
                 // Manejar errores de red
             }
         })
+    }
+
+    companion object {
+        private const val TAG = "LoginActivity"
     }
 }
