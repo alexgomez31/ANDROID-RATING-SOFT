@@ -15,14 +15,7 @@ import androidx.core.view.isVisible
 import com.example.ratingsoft.ui.main.MainActivity
 import com.example.ratingsoft.R
 import com.example.ratingsoft.databinding.FragmentPerfilBinding
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_ALIAS
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_CORREO
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_FOTO
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_LOCALIDAD
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_NOMBRE
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_OTROS
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_POSICIONES
-import com.example.ratingsoft.ui.main.MainActivity.Companion.CLAVE_TELEFONO
+
 
 
 class PerfilFragment : Fragment() {
@@ -51,14 +44,7 @@ class PerfilFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
 
-            correo = it.getString(CLAVE_CORREO)
-            alias = it.getString(CLAVE_ALIAS)
-            nombre = it.getString(CLAVE_NOMBRE)
-            telefono = it.getString(CLAVE_TELEFONO)
-            localidad = it.getString(CLAVE_LOCALIDAD)
-            posiciones = it.getString(CLAVE_POSICIONES)
-            otros = it.getString(CLAVE_OTROS)
-            foto = it.getString(CLAVE_FOTO)
+
 
         }
     }
@@ -70,17 +56,7 @@ class PerfilFragment : Fragment() {
         _binding = FragmentPerfilBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        Log.i("GABRI","FOTOOOOOO: ${foto.toString()} y imagennn: ${selectedImageUri.toString()}")
-        binding.btnSelectImage.setOnClickListener {
-            val mainActivity = requireActivity() as MainActivity
-            launchImagePicker()
-            if (mainActivity.arePermissionsGranted()) {
-                Log.i("GAB", "Los permisos están concedidos")
-            } else {
-                mainActivity.requestPermissions()
-                Log.i("GAB", "Los permisos no están concedidos")
-            }
-        }
+
         binding.btnAddPlayer.setOnClickListener {
             startActivity(Intent(requireContext(), AddPlayerAndTournamentActivity::class.java))
         }

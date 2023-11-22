@@ -1,3 +1,5 @@
+package com.example.ratingsoft.ui.Users
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,15 +11,9 @@ import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ratingsoft.data.Model.User
-
 import com.example.ratingsoft.ui.Users.DetailJugador.Companion.ID_PLAYER
 import com.example.ratingsoft.databinding.FragmentJugadoresBinding
-import com.example.ratingsoft.ui.Users.DetailJugador
-import com.example.ratingsoft.ui.Users.OnPlayerAddedListener
 import com.example.ratingsoft.util.usersAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class userssFragment : Fragment(), OnPlayerAddedListener {
 
@@ -63,7 +59,7 @@ class userssFragment : Fragment(), OnPlayerAddedListener {
         binding.ProgresBar.isVisible = true
 
         val filteredJugadores = jugadores.filter { jugador ->
-            jugador.name.contains(query, ignoreCase = true)
+            jugador.email.contains(query, ignoreCase = true)
         }
 
         Log.i("GAB", "NAME")
@@ -77,9 +73,9 @@ class userssFragment : Fragment(), OnPlayerAddedListener {
 
         // Ejemplo de configuración de datos ficticios
         val jugadoresFicticios = listOf(
-            User(id = 1, name = "Jugador1"),
-            User(id = 2, name = "Jugador2"),
-            User(id = 3, name = "Jugador3")
+            User(id = 1, email = "Correo1"),
+            User(id = 2, email = "Correo2"),
+            User(id = 3, email = "Correo3")
         )
 
         jugadores.addAll(jugadoresFicticios)
@@ -101,6 +97,10 @@ class userssFragment : Fragment(), OnPlayerAddedListener {
     }
 
     override fun onPlayerAdded() {
+        TODO("Not yet implemented")
+    }
+
+    fun User(id: Int, email: String): User {
         TODO("Not yet implemented")
     }
 

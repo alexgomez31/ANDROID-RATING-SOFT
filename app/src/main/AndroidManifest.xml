@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -13,49 +14,47 @@
         android:icon="@drawable/login1"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BaixoMinhoLeagueSinActionBar"
-        tools:targetApi="31">
-        <activity
-            android:name=".data.ListaCursosActivity"
-            android:exported="false" />
+        android:theme="@style/Theme.AppCompat"
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
+
+<!--        <activity-->
+<!--            android:name=".data.ListaCursosActivity"-->
+<!--&lt;!&ndash;    <activity&ndash;&gt;-->
+<!--&lt;!&ndash;            android:name=".Cursos.ListaCursosActivity"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:exported="false" />&ndash;&gt;-->
+
         <activity
             android:name=".ui.Perfil.Configuracion"
             android:exported="false"
             android:screenOrientation="portrait" />
 
-
         <activity
             android:name=".ui.login.ResetPassword"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".NuevoEvento"
-            android:exported="false"
-            android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".ui.Perfil.AddPlayerAndTournament"
-            android:exported="false"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.Users.DetailJugador"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.BaixoMinhoLeagueStartingSinActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.login.RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"

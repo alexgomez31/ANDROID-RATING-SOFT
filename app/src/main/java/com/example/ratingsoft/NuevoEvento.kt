@@ -14,10 +14,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import com.example.ratingsoft.databinding.ActivityNuevoEventoBinding
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
 import java.util.*
 
 class NuevoEvento : AppCompatActivity() {

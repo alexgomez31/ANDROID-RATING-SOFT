@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ratingsoft.R
+import com.example.ratingsoft.data.Model.User
 
-import com.example.ratingsoft.data.model.User
 
 
 class usersAdapter(private var jugadores: List<User>, private val onItemSelected: (Int) -> Unit) : RecyclerView.Adapter<RecyclerViewUsuarios>() {
