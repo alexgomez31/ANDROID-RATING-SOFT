@@ -1,6 +1,5 @@
 package com.example.ratingsoft.ui.Perfil
 
-import LoginActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 
 import com.example.ratingsoft.databinding.ActivityConfiguracionBinding
+import com.example.ratingsoft.ui.login.LoginActivity
 
 class Configuracion : AppCompatActivity() {
 

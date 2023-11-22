@@ -1,5 +1,8 @@
+package com.example.ratingsoft.ui.login
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ratingsoft.data.Model.LoginResponse
 import com.example.ratingsoft.databinding.ActivityLoginBinding
@@ -12,21 +15,28 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : AppCompatActivity() {
 
-    private val BASE_URL = "http://10.185.208.43:8000/api/"
-
+    private val BASE_URL = "http://10.185.208.93:8000/api/"
     private lateinit var apiService: LoginApiService
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupRetrofit()
 
         binding.buttonLogin.setOnClickListener {
-            val email = binding.editTextNombre.text.toString()
+            val email = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
-            login(email, password)
+
+            // Validar campos vacíos
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
+            } else {
+                // Realizar la llamada a la API para autenticar
+                login(email, password)
+            }
         }
     }
 
@@ -40,10 +50,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(email: String, password: String) {
-        val call = apiService.loginUser(email, password)
+        val loginResponse = LoginResponse(email, password)
+        val call = apiService.loginUser(loginResponse)
+
+        binding.progressBarLogin.visibility = View.VISIBLE // Mostrar ProgressBar
 
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                binding.progressBarLogin.visibility = View.INVISIBLE // Ocultar ProgressBar
+
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     val token = loginResponse?.token
@@ -53,12 +68,16 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Log.e(TAG, "Error en la respuesta: ${response.code()}")
                     // Manejar errores de autenticación
+                    Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                binding.progressBarLogin.visibility = View.INVISIBLE // Ocultar ProgressBar
+
                 Log.e(TAG, "Error de red: ${t.message}")
                 // Manejar errores de red
+                Toast.makeText(this@LoginActivity, "Error de red. Inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
             }
         })
     }

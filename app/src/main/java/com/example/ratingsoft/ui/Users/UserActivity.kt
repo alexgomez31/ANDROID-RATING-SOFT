@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class UserActivity : AppCompatActivity() {
 
-    private val BASE_URL = "http://192.168.80.22:8000/login"  // Reemplaza esto con tu URL real
+    private val BASE_URL = "http://10.185.208.93:8000/api/"  // Reemplaza esto con tu URL real
     private lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {

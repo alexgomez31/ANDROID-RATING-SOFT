@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toBottomOf="@id/imageViewLogin" />
 
                 <EditText
-                    android:id="@+id/editTextNombre"
+                    android:id="@+id/editTextEmail"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="50dp"
@@ -68,60 +68,27 @@
                     android:background="@drawable/editext_background"
                     android:drawableStart="@drawable/email_24"
                     android:drawablePadding="20dp"
+                    android:hint="Correo Electrónico"
                     android:inputType="textEmailAddress"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewLogin" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayoutPasswordLogin"
+                <EditText
+                    android:id="@+id/editTextPassword"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginStart="50dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
                     android:background="@drawable/editext_background"
-                    android:elevation="-10dp"
-                    android:orientation="horizontal"
+                    android:drawableStart="@drawable/lock_24"
+                    android:drawablePadding="20dp"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/editTextNombre">
-
-                    <EditText
-                        android:id="@+id/editTextPassword"
-                        android:layout_width="10dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/editext_background"
-                        android:drawableStart="@drawable/lock_24"
-                        android:drawablePadding="20dp"
-                        android:ems="10"
-                        android:inputType="textPassword"
-                        app:layout_constraintEnd_toStartOf="@+id/btnShowPassword"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/btnShowPassword"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:contentDescription="Mostrar/Ocultar contraseña"
-                        android:src="@drawable/outline_visibility_24"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvResetPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/hurmegeometricsans4"
-                    android:text="¿Has olvidado la contraseña?"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/linearLayoutPasswordLogin"
-                    app:layout_constraintStart_toStartOf="@id/linearLayoutPasswordLogin"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutPasswordLogin" />
+                    app:layout_constraintTop_toBottomOf="@id/editTextEmail" />
 
                 <LinearLayout
                     android:id="@+id/idLinearLayoutButtons"
@@ -129,9 +96,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:gravity="center"
-                    app:layout_constraintEnd_toEndOf="@id/linearLayoutPasswordLogin"
-                    app:layout_constraintStart_toStartOf="@id/linearLayoutPasswordLogin"
-                    app:layout_constraintTop_toBottomOf="@id/tvResetPassword">
+                    app:layout_constraintEnd_toEndOf="@id/editTextPassword"
+                    app:layout_constraintStart_toStartOf="@id/editTextPassword"
+                    app:layout_constraintTop_toBottomOf="@id/editTextPassword">
 
                     <Button
                         android:id="@+id/buttonLogin"
@@ -141,24 +108,10 @@
                         android:backgroundTint="@color/blue"
                         android:drawableEnd="@drawable/flecha_derecha"
                         android:gravity="center"
-                        android:text="Continuar"
+                        android:text="Ingresar"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayoutTvCuenta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="30dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/idLinearLayoutButtons"
-                    app:layout_constraintStart_toStartOf="@id/idLinearLayoutButtons"
-                    app:layout_constraintTop_toBottomOf="@id/idLinearLayoutButtons"
-                    android:orientation="horizontal">
-                    <!-- Agrega aquí tus elementos para el diseño adicional que necesitas -->
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
