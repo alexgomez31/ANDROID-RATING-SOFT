@@ -9,7 +9,7 @@ import android.text.method.DigitsKeyListener
 import android.util.Log
 import android.view.View
 import android.widget.*
-import com.example.ratingsoft.data.model.User
+import com.example.ratingsoft.data.Model.User
 import com.example.ratingsoft.databinding.ActivityAddPlayerAndTournamentBinding
 import com.example.ratingsoft.ui.Users.OnPlayerAddedListener
 import userssFragment
@@ -102,7 +102,7 @@ class AddPlayerAndTournamentActivity : AppCompatActivity(), OnPlayerAddedListene
             linearLayout.layoutParams = layoutParams
 
             val nameTextView = TextView(this)
-            nameTextView.text = player.nombre
+            nameTextView.text = player.name
             nameTextView.textSize = 16f
             nameTextView.layoutParams =
                 LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
@@ -132,7 +132,7 @@ class AddPlayerAndTournamentActivity : AppCompatActivity(), OnPlayerAddedListene
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    val playerName = player.nombre
+                    val playerName = player.name
                     val playerScore = editText.text.toString()
 
                     if (!playerName.isNullOrEmpty() && !playerScore.isNullOrEmpty()) {
@@ -153,7 +153,7 @@ class AddPlayerAndTournamentActivity : AppCompatActivity(), OnPlayerAddedListene
 
             editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
-                    val playerName = player.nombre
+                    val playerName = player.name
                     val playerScore = editText.text.toString()
 
                     if (!playerName.isNullOrEmpty() && !playerScore.isNullOrEmpty()) {

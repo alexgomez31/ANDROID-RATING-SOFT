@@ -21,6 +21,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class NuevoEvento : AppCompatActivity() {
+    companion object {
+        const val USUARIO_PUBLICADOR = "usuario_publicador"
+    }
 
     private lateinit var binding: ActivityNuevoEventoBinding
 

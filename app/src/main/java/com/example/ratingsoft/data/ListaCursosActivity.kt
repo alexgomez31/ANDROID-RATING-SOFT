@@ -1,11 +1,11 @@
-package com.example.ratingsoft.Cursos
+package com.example.ratingsoft.data
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.ratingsoft.Cursos.CursoResponse
 import com.example.ratingsoft.R
 import com.example.ratingsoft.data.Model.Curso
-import com.example.ratingsoft.data.CursoResponse
 import com.example.ratingsoft.network.ApiService.CursoApiService
 import retrofit2.Call
 import retrofit2.Callback

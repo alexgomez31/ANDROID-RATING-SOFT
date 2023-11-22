@@ -1,4 +1,4 @@
-package com.example.ratingsoft.data
+package com.example.ratingsoft.Cursos
 
 import com.example.ratingsoft.data.Model.Curso
 

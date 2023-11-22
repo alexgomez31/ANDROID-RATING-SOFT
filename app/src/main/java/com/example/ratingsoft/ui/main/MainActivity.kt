@@ -24,7 +24,7 @@ import userssFragment
 
 
 class MainActivity : AppCompatActivity() {
-
+    // Declaración de variables miembro
     private lateinit var binding: ActivityMainBinding
     private var fragmentPerfil = PerfilFragment()
     private var adapter: ViewPagerFragmentAdapter? = null
@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     private var args: Bundle? = null
     private val requiredPermissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
 
+    // Clase interna que actúa como adaptador para ViewPager
     inner class ViewPagerFragmentAdapter(
         fragmentActivity: FragmentActivity,
         val fragments: List<Fragment>
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Constantes para identificar datos entre actividades
     companion object {
         const val CLAVE_CORREO = "correo"
         const val CLAVE_ALIAS = "alias"
@@ -71,15 +73,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Configuración inicial
         binding.bottomNavigation.setBackground(null)
         loadTheme()
 
+        // Verificar y solicitar permisos si es necesario
         if (!arePermissionsGranted()) {
             requestPermissions()
         }
 
+        // Configurar el ViewPager y eventos de navegación
         viewPager()
 
+        // Configurar el listener del menú de navegación inferior
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
@@ -91,15 +97,20 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        // Configurar el listener del botón flotante
         binding.floatinButton.setOnClickListener {
             alias?.let { it1 -> navigateToNewEvent(it1) }
         }
     }
 
-    private fun navigateToNewEvent(it1: String) {
-
+    // Función para navegar a la pantalla de Nuevo Evento
+    private fun navigateToNewEvent(usuario: String) {
+        val intent = Intent(this, NuevoEvento::class.java)
+        intent.putExtra(NuevoEvento.USUARIO_PUBLICADOR, usuario)
+        startActivityForResult(intent, REQUEST_CODE_NUEVO_EVENTO)
     }
 
+    // Función para mostrar el contenido principal de la actividad
     private fun showMainActivityContent() {
         View.VISIBLE.also { binding.viewPager.visibility = it }
         binding.tabs.visibility = View.VISIBLE
@@ -112,6 +123,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+    // Función para configurar el ViewPager y el TabLayout
     private fun viewPager() {
         val viewPager: ViewPager2 = binding.viewPager
         val tabs: TabLayout = binding.tabs
@@ -134,6 +146,7 @@ class MainActivity : AppCompatActivity() {
         0.also { binding.viewPager.currentItem = it }
     }
 
+    // Función para cargar el tema desde SharedPreferences
     private fun loadTheme() {
         val sharedPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
 
@@ -145,6 +158,7 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(themeMode)
     }
 
+    // Función llamada cuando se recibe un resultado de otra actividad
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -153,28 +167,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private fun navigateToNewEvent(usuario: String) {
-//        val intent = Intent(this, NuevoEvento::class.java)
-//        intent.putExtra(NuevoEvento.USUARIO_PUBLICADOR, usuario)
-//        startActivityForResult(intent, REQUEST_CODE_NUEVO_EVENTO)
-//    }
-
-//    private fun loadFoto(foto: String?) {
-//        if (foto != null) {
-//            val imageUri = Uri.parse(foto)
-//            val picasso = Picasso.get()
-//            picasso.load(imageUri).fetch(object : Callback {
-//                override fun onSuccess() {
-//                    // La imagen se ha precargado correctamente
-//                }
-
-//                override fun onError(e: Exception) {
-//                    // Error al precargar la imagen
-//                }
-//            })
-//        }
-//    }
-
+    // Función para verificar si los permisos están concedidos
     fun arePermissionsGranted(): Boolean {
         for (permission in requiredPermissions) {
             if (ContextCompat.checkSelfPermission(
@@ -188,10 +181,12 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    // Función para solicitar permisos
     fun requestPermissions() {
         ActivityCompat.requestPermissions(this, requiredPermissions, REQUEST_CODE_PERMISSIONS)
     }
 
+    // Función llamada cuando se obtiene el resultado de solicitar permisos
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -214,16 +209,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Función para obtener datos del usuario de la base de datos
     private fun getDataBd(correo: String) {
         // Lógica para obtener datos del usuario sin Firebase
     }
 
+    // Función para guardar datos en SharedPreferences
     private fun saveData() {
         val prefs = getSharedPreferences(getString(R.string.prefs_file), MODE_PRIVATE).edit()
         prefs.putString("email", "password")
         prefs.apply()
     }
 
+    // Función para reemplazar un fragmento en el contenedor
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -232,6 +230,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
+        // Listener para manejar la visibilidad del ViewPager y el TabLayout
         fragmentManager.addOnBackStackChangedListener {
             val isBackStackEmpty = fragmentManager.backStackEntryCount == 0
             (if (isBackStackEmpty) View.VISIBLE else View.GONE).also {

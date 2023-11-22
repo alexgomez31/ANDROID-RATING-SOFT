@@ -1,6 +1,6 @@
 package com.example.ratingsoft.network.ApiService
 
-import com.example.ratingsoft.data.CursoResponse
+import com.example.ratingsoft.Cursos.CursoResponse
 import retrofit2.Call
 import retrofit2.http.GET
 

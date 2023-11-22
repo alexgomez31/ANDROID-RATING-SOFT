@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ratingsoft.R
-import com.example.ratingsoft.data.Model.LoginResponse
+import com.example.ratingsoft.io.Response.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ratingsoft.data.Model.User
 
 import com.example.ratingsoft.ui.Users.DetailJugador.Companion.ID_PLAYER
-import com.example.ratingsoft.data.model.User
 import com.example.ratingsoft.databinding.FragmentJugadoresBinding
 import com.example.ratingsoft.ui.Users.DetailJugador
 import com.example.ratingsoft.ui.Users.OnPlayerAddedListener
@@ -63,7 +63,7 @@ class userssFragment : Fragment(), OnPlayerAddedListener {
         binding.ProgresBar.isVisible = true
 
         val filteredJugadores = jugadores.filter { jugador ->
-            jugador.nombre.contains(query, ignoreCase = true)
+            jugador.name.contains(query, ignoreCase = true)
         }
 
         Log.i("GAB", "NAME")
@@ -77,9 +77,9 @@ class userssFragment : Fragment(), OnPlayerAddedListener {
 
         // Ejemplo de configuración de datos ficticios
         val jugadoresFicticios = listOf(
-            User(id = 1, nombre = "Jugador1"),
-            User(id = 2, nombre = "Jugador2"),
-            User(id = 3, nombre = "Jugador3")
+            User(id = 1, name = "Jugador1"),
+            User(id = 2, name = "Jugador2"),
+            User(id = 3, name = "Jugador3")
         )
 
         jugadores.addAll(jugadoresFicticios)
