@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginActivity">
+    android:background="@drawable/fondo2">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
 
                     <EditText
                         android:id="@+id/editTextPassword"
-                        android:layout_width="3dp"
+                        android:layout_width="10dp"
                         android:layout_height="30dp"
                         android:background="@drawable/editext_background"
                         android:drawableStart="@drawable/lock_24"
@@ -133,8 +133,6 @@
                     app:layout_constraintStart_toStartOf="@id/linearLayoutPasswordLogin"
                     app:layout_constraintTop_toBottomOf="@id/tvResetPassword">
 
-
-
                     <Button
                         android:id="@+id/buttonLogin"
                         android:layout_width="wrap_content"
@@ -160,7 +158,7 @@
                     app:layout_constraintStart_toStartOf="@id/idLinearLayoutButtons"
                     app:layout_constraintTop_toBottomOf="@id/idLinearLayoutButtons"
                     android:orientation="horizontal">
-
+                    <!-- Agrega aquí tus elementos para el diseño adicional que necesitas -->
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

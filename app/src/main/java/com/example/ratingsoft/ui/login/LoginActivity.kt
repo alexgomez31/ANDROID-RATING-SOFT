@@ -1,5 +1,3 @@
-package com.example.ratingsoft.ui.login
-
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -25,10 +23,10 @@ class LoginActivity : AppCompatActivity() {
 
         setupRetrofit()
 
-        // Maneja la lógica de tu interfaz de usuario aquí, por ejemplo, al hacer clic en un botón de inicio de sesión.
-        // Luego, llama a la función login con las credenciales del usuario.
         binding.buttonLogin.setOnClickListener {
-            login(binding.editTextNombre.text.toString(), binding.editTextPassword.text.toString())
+            val email = binding.editTextNombre.text.toString()
+            val password = binding.editTextPassword.text.toString()
+            login(email, password)
         }
     }
 
