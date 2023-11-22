@@ -1,4 +1,5 @@
 package com.example.ratingsoft.ui.login
+
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class LoginActivity : AppCompatActivity() {
 
     private val BASE_URL = "http://10.185.208.93:8000/api/"
+
     private lateinit var apiService: LoginApiService
     private lateinit var binding: ActivityLoginBinding
 
@@ -64,11 +66,15 @@ class LoginActivity : AppCompatActivity() {
                     val token = loginResponse?.token
                     Log.d(TAG, "Token: $token")
 
-                    // Aquí puedes manejar el éxito del inicio de sesión, como navegar a la siguiente actividad.
+                    // TODO: Guardar el token en SharedPreferences u otro lugar seguro
+
+                    // TODO: Navegar a la siguiente actividad
+
                 } else {
                     Log.e(TAG, "Error en la respuesta: ${response.code()}")
+                    val errorMessage = response.errorBody()?.string() ?: "Credenciales incorrectas"
                     // Manejar errores de autenticación
-                    Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
 
